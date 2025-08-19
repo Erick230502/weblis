@@ -1,0 +1,24 @@
+<div class="detail-content-block">
+    <h5>Bloque de Contenido #<%= contentIndex + 1 %></h5>
+    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i></button>
+    <div class="form-group">
+        <label for="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_title">Título del Bloque:</label>
+        <input type="text" id="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_title" name="itemDetails[<%= mainIndex %>][contentSections][<%= contentIndex %>][title]" value="<%= block.title || '' %>" required>
+    </div>
+    <div class="form-group">
+        <label for="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_text">Texto del Bloque:</label>
+        <textarea id="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_text" name="itemDetails[<%= mainIndex %>][contentSections][<%= contentIndex %>][text]" rows="4" required><%= block.text || '' %></textarea>
+    </div>
+    <div class="form-group">
+        <label for="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_image">URL de Imagen del Bloque:</label>
+        <input type="text" id="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_image" name="itemDetails[<%= mainIndex %>][contentSections][<%= contentIndex %>][image]" value="<%= block.image || '' %>" required>
+    </div>
+    <div class="form-group">
+        <label for="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_imageCaption">Pie de Foto de Imagen:</label>
+        <input type="text" id="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_imageCaption" name="itemDetails[<%= mainIndex %>][contentSections][<%= contentIndex %>][imageCaption]" value="<%= block.imageCaption || '' %>">
+    </div>
+    <div class="form-group">
+        <label for="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_isReversed">Imagen a la Izquierda (Invertir Layout):</label>
+        <input type="checkbox" id="itemDetails_<%= mainIndex %>_contentSections_<%= contentIndex %>_isReversed" name="itemDetails[<%= mainIndex %>][contentSections][<%= contentIndex %>][isReversed]" <%= block.isReversed ? 'checked' : '' %>>
+    </div>
+</div>

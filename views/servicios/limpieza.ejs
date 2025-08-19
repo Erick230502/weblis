@@ -1,0 +1,360 @@
+<style>
+/* --- Nuevos Estilos para Limpieza.ejs --- */
+
+.limpieza-hero-section {
+    background: linear-gradient(rgba(14, 69, 122, 0.8), rgba(10, 132, 55, 0.7)), url('/img/trabajando11.jpg') no-repeat center center/cover;
+    color: var(--light-text-color);
+    padding: 8rem 0; /* ¡Cambio clave aquí! Se elimina el padding horizontal. */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Eliminado: border-radius: var(--border-radius); */
+    margin-bottom: 4rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.limpieza-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.limpieza-hero-section h1 {
+    font-size: 4rem;
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.limpieza-hero-section .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.limpieza-intro-section {
+    padding: 3rem 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.limpieza-intro-section .intro-card {
+    background-color: #f0f8ff; /* Un azul muy claro */
+    border-left: 5px solid var(--secondary-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.limpieza-intro-section .intro-card p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.limpieza-intro-section .intro-card p:last-child {
+    margin-bottom: 0;
+}
+
+.limpieza-content-section {
+    padding: 4rem 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.limpieza-content-section .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.limpieza-content-section .content-grid:last-child {
+    margin-bottom: 0;
+}
+
+.limpieza-content-section .content-grid.reverse-grid {
+    direction: rtl; /* Invierte el orden visual de las columnas */
+}
+
+.limpieza-content-section .content-grid.reverse-grid > * {
+    direction: ltr; /* Restaura la dirección del texto dentro de las columnas */
+}
+
+.limpieza-content-section .text-block h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.limpieza-content-section .text-block p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.limpieza-content-section .image-block {
+    text-align: center;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.limpieza-content-section .image-block:hover {
+    transform: translateY(-5px);
+}
+
+.limpieza-content-section .image-block .clean-image {
+    max-width: 100%;
+    height: 350px; /* Altura fija para consistencia */
+    object-fit: cover; /* Recorta la imagen para que cubra el espacio */
+    border-radius: var(--border-radius);
+    margin-bottom: 0.8rem;
+}
+
+.limpieza-content-section .image-block .image-caption {
+    font-size: 0.95rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.limpieza-contact-info {
+    padding: 5rem 1.5rem;
+    background-color: var(--primary-color); /* Fondo azul oscuro */
+    color: var(--light-text-color);
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin-bottom: 4rem;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.limpieza-contact-info h2 {
+    font-size: 3rem;
+    color: var(--light-text-color);
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.limpieza-contact-info .contact-card {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: center;
+    gap: 2rem;
+}
+
+.limpieza-contact-info .contact-item {
+    background-color: #ffffff; /* Fondo blanco para las tarjetas de contacto */
+    color: var(--text-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Permite que los elementos se expandan */
+    min-width: 280px; /* Ancho mínimo para cada tarjeta */
+    max-width: 350px; /* Ancho máximo para cada tarjeta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.limpieza-contact-info .contact-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.limpieza-contact-info .contact-item .fas {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.limpieza-contact-info .contact-item h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.limpieza-contact-info .contact-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* --- Media Queries para limpieza.ejs --- */
+@media (max-width: 992px) {
+    .limpieza-hero-section {
+        padding: 6rem 0; /* Ajuste para móviles, también sin padding horizontal */
+    }
+    .limpieza-hero-section h1 {
+        font-size: 3rem;
+    }
+    .limpieza-hero-section .subtitle {
+        font-size: 1.3rem;
+    }
+    .limpieza-content-section .content-grid {
+        grid-template-columns: 1fr; /* Una columna en tablets */
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    .limpieza-content-section .content-grid.reverse-grid {
+        direction: ltr; /* Desactiva la inversión de orden en móvil */
+    }
+    .limpieza-content-section .text-block h2 {
+        font-size: 2.2rem;
+    }
+    .limpieza-content-section .text-block p {
+        font-size: 1rem;
+    }
+    .limpieza-content-section .image-block .clean-image {
+        height: 300px;
+    }
+    .limpieza-contact-info h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .limpieza-hero-section {
+        padding: 5rem 0; /* Ajuste para móviles, también sin padding horizontal */
+    }
+    .limpieza-hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .limpieza-hero-section .subtitle {
+        font-size: 1.1rem;
+    }
+    .limpieza-intro-section .intro-card {
+        padding: 1.8rem;
+    }
+    .limpieza-intro-section .intro-card p {
+        font-size: 1rem;
+    }
+    .limpieza-content-section {
+        padding: 3rem 1rem;
+    }
+    .limpieza-content-section .image-block .clean-image {
+        height: 250px;
+    }
+    .limpieza-contact-info h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .limpieza-contact-info .contact-item {
+        min-width: 250px; /* Permite que sean más pequeños */
+        padding: 2rem;
+    }
+    .limpieza-contact-info .contact-item .fas {
+        font-size: 2.5rem;
+    }
+    .limpieza-contact-info .contact-item h3 {
+        font-size: 1.6rem;
+    }
+    .limpieza-contact-info .contact-item p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .limpieza-hero-section {
+        padding: 4rem 0; /* Ajuste para móviles, también sin padding horizontal */
+    }
+    .limpieza-hero-section h1 {
+        font-size: 2rem;
+    }
+    .limpieza-hero-section .subtitle {
+        font-size: 1rem;
+    }
+    .limpieza-intro-section .intro-card {
+        padding: 1.5rem;
+    }
+    .limpieza-content-section .image-block .clean-image {
+        height: 200px;
+    }
+    .limpieza-contact-info h2 {
+        font-size: 1.8rem;
+    }
+    .limpieza-contact-info .contact-card {
+        flex-direction: column; /* Apila las tarjetas de contacto en pantallas muy pequeñas */
+        align-items: center;
+    }
+    .limpieza-contact-info .contact-item {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        max-width: 300px; /* Limita el ancho máximo */
+    }
+}
+</style>
+
+<section class="limpieza-hero-section" data-aos="fade-up" data-aos-duration="1200">
+    <div class="hero-content container"> <!-- El contenido interno sigue en el contenedor para centrarlo -->
+        <h1>Soluciones de Limpieza que Transforman</h1>
+        <p class="subtitle">En JEGUEN, su espacio es nuestro lienzo.</p>
+    </div>
+</section>
+
+<section class="limpieza-intro-section container" data-aos="fade-up" data-aos-delay="200">
+    <div class="intro-card">
+        <p>En JEGUEN tenemos lo que necesitas para una limpieza eficaz: productos y servicios de alta calidad, efectivos y al mejor precio.</p>
+        <p>Nos enfocamos en ofrecerte resultados reales y productos que marcan la diferencia. Confía en nosotros para un entorno impecable.</p>
+    </div>
+</section>
+
+<section class="limpieza-content-section container">
+    <div class="content-grid">
+        <div class="text-block" data-aos="fade-right" data-aos-delay="300">
+            <h2>Nuestra Promesa de Limpieza</h2>
+            <p>Con años de experiencia en el sector, JEGUEN SOLUTIONS se ha consolidado como un referente en servicios y productos de limpieza. Entendemos la importancia de un ambiente limpio y seguro, tanto para la salud como para la productividad.</p>
+            <p>Utilizamos tecnología de vanguardia y personal altamente capacitado para garantizar que cada rincón de su espacio refleje la excelencia y el cuidado que nos caracterizan. Desde grandes superficies hasta detalles minuciosos, nuestra dedicación es total.</p>
+        </div>
+        <div class="image-block" data-aos="fade-left" data-aos-delay="400">
+            <img src="/img/limpieza-profesional-1.jpeg" alt="Imagen de Limpieza Profesional 1" class="clean-image">
+            <p class="image-caption">Equipo profesional en acción.</p>
+        </div>
+    </div>
+
+    <div class="content-grid reverse-grid">
+        <div class="image-block" data-aos="fade-right" data-aos-delay="500">
+            <img src="/img/limpieza-profesional-2.jpg" alt="Imagen de Limpieza Profesional 2" class="clean-image">
+            <p class="image-caption">Innovación en productos de limpieza.</p>
+        </div>
+        <div class="text-block" data-aos="fade-left" data-aos-delay="600">
+            <h2>Calidad y Eficacia Garantizada</h2>
+            <p>Nuestros productos están formulados para ser potentes contra la suciedad, pero seguros para sus espacios y el medio ambiente. Cada servicio de limpieza es ejecutado con la máxima atención al detalle, asegurando una higiene profunda y duradera.</p>
+            <p>La satisfacción de nuestros clientes es el motor que impulsa nuestra mejora continua. Nos adaptamos a sus horarios y necesidades específicas, ofreciendo soluciones personalizadas que se ajustan perfectamente a su presupuesto y expectativas.</p>
+        </div>
+    </div>
+</section>
+
+<section class="limpieza-contact-info container" data-aos="fade-up" data-aos-delay="700">
+    <h2>¿Listo para un espacio impecable? Contáctanos</h2>
+    <div class="contact-card">
+        <div class="contact-item">
+            <i class="fas fa-building"></i>
+            <h3>JEGUEN SOLUTIONS</h3>
+            <p>JEGUEN S DE RL DE CV</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Teléfono</h3>
+            <p>55 54 625545</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>administrativo@jeguen.com</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,359 @@
+<style>
+.limpieza-hero-section {
+    background: linear-gradient(rgba(19, 124, 221, 0.8), rgba(250, 166, 63, 0.69)), url('/img/proteccionCivil.jpg') no-repeat center center/cover;
+    color: var(--light-text-color);
+    padding: 8rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.limpieza-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.limpieza-hero-section h1 {
+    font-size: 4rem;
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.limpieza-hero-section .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.limpieza-intro-section {
+    padding: 3rem 1.5rem;
+    margin-bottom: 4rem;
+    
+}
+
+.limpieza-intro-section .intro-card {
+    background-color: #f0f8ff;
+    border-left: 5px solid var(--primary-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.limpieza-intro-section .intro-card p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.limpieza-intro-section .intro-card p:last-child {
+    margin-bottom: -10;
+}
+
+.limpieza-content-section {
+    padding: 4rem 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.limpieza-content-section .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.limpieza-content-section .content-grid:last-child {
+    margin-bottom: 0;
+}
+
+.limpieza-content-section .content-grid.reverse-grid {
+    direction: rtl; /* Invierte el orden visual de las columnas */
+}
+
+.limpieza-content-section .content-grid.reverse-grid > * {
+    direction: ltr; /* Restaura la dirección del texto dentro de las columnas */
+}
+
+.limpieza-content-section .text-block h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.limpieza-content-section .text-block p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.limpieza-content-section .image-block {
+    text-align: center;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.limpieza-content-section .image-block:hover {
+    transform: translateY(-5px);
+}
+
+.limpieza-content-section .image-block .clean-image {
+    max-width: 100%;
+    height: 350px; /* Altura fija para consistencia */
+    object-fit: cover; /* Recorta la imagen para que cubra el espacio */
+    border-radius: var(--border-radius);
+    margin-bottom: 0.8rem;
+}
+
+.limpieza-content-section .image-block .image-caption {
+    font-size: 0.95rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.limpieza-contact-info {
+    padding: 5rem 1.5rem;
+    background-color: var(--primary-color); 
+    color: var(--light-text-color);
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin-bottom: 4rem;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.limpieza-contact-info h2 {
+    font-size: 3rem;
+    color: var(--light-text-color);
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.limpieza-contact-info .contact-card {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 2rem;
+}
+
+.limpieza-contact-info .contact-item {
+    background-color: #ffffff; 
+    color: var(--text-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    flex: 1; 
+    min-width: 280px; /* Ancho mínimo para cada tarjeta */
+    max-width: 350px; /* Ancho máximo para cada tarjeta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.limpieza-contact-info .contact-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.limpieza-contact-info .contact-item .fas {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.limpieza-contact-info .contact-item h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.limpieza-contact-info .contact-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* --- Media Queries para limpieza.ejs --- */
+@media (max-width: 992px) {
+    .limpieza-hero-section {
+        padding: 6rem 0; /* Ajuste para móviles, también sin padding horizontal */
+    }
+    .limpieza-hero-section h1 {
+        font-size: 3rem;
+    }
+    .limpieza-hero-section .subtitle {
+        font-size: 1.3rem;
+    }
+    .limpieza-content-section .content-grid {
+        grid-template-columns: 1fr; /* Una columna en tablets */
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    .limpieza-content-section .content-grid.reverse-grid {
+        direction: ltr; /* Desactiva la inversión de orden en móvil */
+    }
+    .limpieza-content-section .text-block h2 {
+        font-size: 2.2rem;
+    }
+    .limpieza-content-section .text-block p {
+        font-size: 1rem;
+    }
+    .limpieza-content-section .image-block .clean-image {
+        height: 300px;
+    }
+    .limpieza-contact-info h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .limpieza-hero-section {
+        padding: 5rem 0; /* Ajuste para móviles, también sin padding horizontal */
+    }
+    .limpieza-hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .limpieza-hero-section .subtitle {
+        font-size: 1.1rem;
+    }
+    .limpieza-intro-section .intro-card {
+        padding: 1.8rem;
+    }
+    .limpieza-intro-section .intro-card p {
+        font-size: 1rem;
+    }
+    .limpieza-content-section {
+        padding: 3rem 1rem;
+    }
+    .limpieza-content-section .image-block .clean-image {
+        height: 250px;
+    }
+    .limpieza-contact-info h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .limpieza-contact-info .contact-item {
+        min-width: 250px; /* Permite que sean más pequeños */
+        padding: 2rem;
+    }
+    .limpieza-contact-info .contact-item .fas {
+        font-size: 2.5rem;
+    }
+    .limpieza-contact-info .contact-item h3 {
+        font-size: 1.6rem;
+    }
+    .limpieza-contact-info .contact-item p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .limpieza-hero-section {
+        padding: 4rem 0; /* Ajuste para móviles, también sin padding horizontal */
+    }
+    .limpieza-hero-section h1 {
+        font-size: 2rem;
+    }
+    .limpieza-hero-section .subtitle {
+        font-size: 1rem;
+    }
+    .limpieza-intro-section .intro-card {
+        padding: 1.5rem;
+    }
+    .limpieza-content-section .image-block .clean-image {
+        height: 200px;
+    }
+    .limpieza-contact-info h2 {
+        font-size: 1.8rem;
+    }
+    .limpieza-contact-info .contact-card {
+        flex-direction: column; /* Apila las tarjetas de contacto en pantallas muy pequeñas */
+        align-items: center;
+    }
+    .limpieza-contact-info .contact-item {
+        width: 100%; 
+        max-width: 300px; 
+    }
+}
+</style>
+
+<section class="limpieza-hero-section" data-aos="fade-up" data-aos-duration="1200">
+    <div class="hero-content container"> 
+        <h1>DISEÑADO PARA PROTEGER. CONSTRUIDO PARA DURAR.</h1>
+        <p class="subtitle">En JEGUEN, creamos soluciones que acompañan, resisten y protegen.</p>
+    </div>
+</section>
+
+<section class="limpieza-intro-section container" style="margin-bottom: -15px;" data-aos="fade-up" data-aos-delay="200">
+    <div class="intro-card" style="text-align:justify;">
+        <p>Ofrecemos prendas de protección personal diseñadas para acompañar al personal operativo en cada escenario crítico: lluvia, baja visibilidad, contacto exterior o intervención de emergencia.</p>
+        <p>Nuestras soluciones combinan resistencia, funcionalidad y diseño inteligente, ideales para brigadas de protección civil y cualquier equipo que necesite actuar con seguridad, confianza y libertad de movimiento.</p>
+        <p>Cada prenda está pensada para responder cuando más se necesita, cumpliendo con exigencias técnicas reales y cuidando cada detalle: materiales duraderos, estampados reflectantes, sellado profesional y confección de alta calidad. </p>
+    </div>
+</section>
+
+<section class="limpieza-content-section container">
+    <div class="content-grid">
+        <div class="text-block" style="text-align:justify;" style="margin-right: 20px;" data-aos="fade-right" data-aos-delay="300">
+            <h2>PROTECCIÓN PERSONAL CON PROPÓSITO</h2>
+            <p>Años de experiencia nos han enseñado que <strong>la protección no admite improvisaciones </strong>. Por eso diseñamos, producimos y suministramos indumentaria operativa que cumple, protege y representa a las instituciones más exigentes.</p>
+            <p>Sabemos lo que implica estar en campo bajo lluvia intensa, visibilidad limitada o situaciones de emergencia. Por eso creamos <strong>soluciones textiles técnicas</strong>, con materiales certificados, diseño funcional y acabados de calidad profesional.</p>
+        </div>
+        <div class="image-block" style="margin-left: 80px;" data-aos="fade-left" data-aos-delay="400">
+            <img src="/img/proteccionVicil2.jpg" alt="Equipamiento para tu protección" class="clean-image">
+            <p class="image-caption">Equipo profesional de alta calidad.</p>
+        </div>
+    </div>
+
+    <div class="content-grid reverse-grid">
+        <div class="image-block" style="margin-left: 80px;" data-aos="fade-right" data-aos-delay="500">
+            <img src="/img/imagen4.jpg" alt="Imagen de Limpieza Profesional 2" class="clean-image">
+            <p class="image-caption">Compromiso para tu prestigio.</p>
+        </div>
+        <div class="text-block" style="text-align: justify" data-aos="fade-left" data-aos-delay="600">
+            <h2>COMPROMETIDOS CON TU MISIÓN</h2>
+            <p>Cuando el personal operativo necesita estar protegido, visible y listo para actuar, <strong>nuestras prendas ya están listas para cumplir</strong>.</p>
+            <p>Cada costura termosellada, cada centímetro de tela de alta visibilidad, cada broche y cada logo están ahí por una razón: <strong>funcionar cuando lo demás falla </strong>. Porque en campo abierto no hay margen para errores, y la protección personal no es un accesorio: <strong>es parte del equipo</strong>. </p>
+        </div>
+    </div>
+</section>
+
+<section class="limpieza-contact-info container" style="margin-top: -40px;" data-aos="fade-up" data-aos-delay="700">
+    <h2>¿Listo para un espacio impecable? Contáctanos</h2>
+    <div class="contact-card">
+        <div class="contact-item">
+            <i class="fas fa-building"></i>
+            <h3>JEGUEN SOLUTIONS</h3>
+            <p>JEGUEN S DE RL DE CV</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Teléfono</h3>
+            <p>55 54 625545</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>administrativo@jeguen.com</p>
+        </div>
+    </div>
+</section>

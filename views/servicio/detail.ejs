@@ -1,0 +1,248 @@
+<style>
+/* --- Nuevos Estilos para licitacion-detail-page --- */
+
+.hero-detail-section {
+    background: linear-gradient(rgba(14, 69, 122, 0.8), rgba(10, 132, 55, 0.7)), url('/img/trabajando11.jpg') no-repeat center center/cover;
+    color: var(--light-text-color);
+    padding: 8rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hero-detail-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-detail-section h1 {
+    font-size: 4rem;
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+.hero-detail-section .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.intro-section {
+    padding: 3rem 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.intro-section .intro-card {
+    background-color: #f0f8ff;
+    border-left: 5px solid var(--secondary-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.intro-section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.intro-section p:last-child {
+    margin-bottom: 0;
+}
+
+.content-blocks-section {
+    padding: 4rem 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.content-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.content-blocks-section .content-block:last-child {
+    margin-bottom: 0;
+}
+
+.content-block.reversed {
+    direction: rtl;
+}
+
+.content-block.reversed > * {
+    direction: ltr;
+}
+
+.text-content h3 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.image-content {
+    text-align: center;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.image-content:hover {
+    transform: translateY(-5px);
+}
+
+.image-content img {
+    max-width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.8rem;
+}
+
+.image-content .image-caption {
+    font-size: 0.95rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.detail-contact-section {
+    padding: 5rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin-bottom: 4rem;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.detail-contact-section h4 {
+    font-size: 3rem;
+    color: var(--light-text-color);
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.contact-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.contact-info-grid .contact-item {
+    background-color: #ffffff;
+    color: var(--text-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-grid .contact-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info-grid .contact-item .fas {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.contact-info-grid .contact-item h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.contact-info-grid .contact-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-align: center;
+}
+</style>
+
+<div class="licitacion-detail-page">
+    
+    <section class="hero-detail-section" style="background-image: url('<%= itemDetail.hero.backgroundImage %>');">
+        <div class="hero-content">
+            <h1><%= itemDetail.hero.title %></h1>
+            <% if (itemDetail.hero.subtitle) { %>
+                <p class="subtitle"><%= itemDetail.hero.subtitle %></p>
+            <% } %>
+        </div>
+    </section>
+
+    <div class="container">
+        <% if (itemDetail.intro && (itemDetail.intro.paragraph1 || itemDetail.intro.paragraph2 || itemDetail.intro.paragraph3)) { %>
+            <section class="intro-section">
+                <% if (itemDetail.intro.paragraph1) { %><p><%= itemDetail.intro.paragraph1 %></p><% } %>
+                <% if (itemDetail.intro.paragraph2) { %><p><%= itemDetail.intro.paragraph2 %></p><% } %>
+                <% if (itemDetail.intro.paragraph3) { %><p><%= itemDetail.intro.paragraph3 %></p><% } %>
+            </section>
+        <% } %>
+
+        <% if (itemDetail.contentSections && itemDetail.contentSections.length > 0) { %>
+            <section class="content-blocks-section">
+                <% itemDetail.contentSections.forEach(function(block) { %>
+                    <div class="content-block <%= block.isReversed ? 'reversed' : '' %>">
+                        <div class="text-content">
+                            <h3><%= block.title %></h3>
+                            <p><%= block.text %></p>
+                        </div>
+                        <div class="image-content">
+                            <img src="<%= block.image %>" alt="<%= block.title %>">
+                            <% if (block.imageCaption) { %>
+                                <small class="image-caption"><%= block.imageCaption %></small>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            </section>
+        <% } %>
+
+        <% if (itemDetail.contactInfo) { %>
+            <section class="detail-contact-section">
+                <h4><%= itemDetail.contactInfo.title || 'Información de Contacto' %></h4>
+                <div class="contact-info-grid">
+                    <% if (itemDetail.contactInfo.companyName) { %><p><strong>Empresa:</strong> <%= itemDetail.contactInfo.companyName %></p><% } %>
+                    <% if (itemDetail.contactInfo.companyDetail) { %><p><strong>Detalle:</strong> <%= itemDetail.contactInfo.companyDetail %></p><% } %>
+                    <% if (itemDetail.contactInfo.phone) { %><p><strong>Teléfono:</strong> <%= itemDetail.contactInfo.phone %></p><% } %>
+                    <% if (itemDetail.contactInfo.email) { %><p><strong>Email:</strong> <%= itemDetail.contactInfo.email %></p><% } %>
+                </div>
+            </section>
+        <% } %>
+    </div>
+</div>

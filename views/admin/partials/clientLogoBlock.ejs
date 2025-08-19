@@ -1,0 +1,13 @@
+<div class="dynamic-item-block">
+    <h4>Logo de Cliente #<%= index + 1 %></h4>
+    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+    <div class="form-group">
+        <label for="<%= parentFieldName %>_<%= index %>_image">URL de Imagen del Logo:</label>
+        <input type="text" id="<%= parentFieldName %>_<%= index %>_image" name="<%= parentFieldName %>[<%= index %>][image]" value="<%= logo.image || '' %>" required>
+    </div>
+    <div class="form-group">
+        <label for="<%= parentFieldName %>_<%= index %>_altText">Texto Alternativo (Alt Text):</label>
+        <input type="text" id="<%= parentFieldName %>_<%= index %>_altText" name="<%= parentFieldName %>[<%= index %>][altText]" value="<%= logo.altText || '' %>">
+        <small>Descripción de la imagen para accesibilidad y SEO.</small>
+    </div>
+</div>

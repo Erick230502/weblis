@@ -1,0 +1,634 @@
+/* --- Variables CSS (Mantener tus variables principales) --- */
+:root {
+    --primary-color: #0E457A; /* Azul Jeguen */
+    --secondary-color: #f49e13; 
+    --text-color: #343a40;
+    --light-text-color: #f8f9fa;
+    --background-light: #f8f9fa;
+    --background-dark: #212529;
+    --border-radius: 8px;
+    --transition-speed: 0.3s ease;
+
+    /* Nuevas variables para el admin dashboard */
+    --card-background: #ffffff;
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --border-light: 1px solid #e0e0e0;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --info-color: #007bff;
+
+    /* Nuevos colores para botones de acción */
+    --action-edit-color: #007bff; /* Azul */
+    --action-view-color: #28a745; /* Verde */
+    --action-delete-color: #dc3545; /* Rojo */
+}
+
+/* --- Reseteo Básico y Tipografía (Mantener) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", "Open Sans", sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-light);
+    overflow-x: hidden;
+    padding-top: 110px; /* Ajusta este valor si la altura de tu header cambia */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Contenedor General para el contenido del admin (Modificado) --- */
+.dashboard-content { 
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 25px;
+}
+
+/* --- Header y Navbar (Mantener de la respuesta anterior) --- */
+.main-header {
+    background-color: #0E457A;
+    box-shadow: 3px 0 16px rgba(0, 0, 0, 0.8);
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 90px; 
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-left: -5rem; 
+    background-color: white; 
+    padding: 0.5rem 1rem; 
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0);
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--light-text-color);
+    transition: opacity var(--transition-speed);
+}
+
+.logo-link:hover {
+    opacity: 0.9;
+}
+
+.logo {
+    height: 110px;
+    margin-right: 1.5rem;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.6)); 
+    border-radius: 5px;
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: -0.8px;
+    color: var(--primary-color);
+}
+
+.brand-text .tagline {
+    margin: 0; 
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--text-color); 
+    line-height: 1.2;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links .nav-item {
+    font-family: "Montserrat", "Open Sans", sans-serif;
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-weight: 275;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color var(--transition-speed);
+    letter-spacing: 0.5px;
+}
+
+.nav-links .nav-item:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.nav-links .nav-item::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-color);
+    transition: width var(--transition-speed) ease-in-out;
+}
+
+.nav-links .nav-item:hover::before {
+    width: 100%;
+}
+
+/* --- Menú Hamburguesa (Mobile - Mantener) --- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 0;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--light-text-color);
+    border-radius: 5px;
+    transition: all var(--transition-speed);
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* --- Contenido Principal (Mantener) --- */
+#main-content {
+    min-height: calc(100vh - 200px); 
+    padding-top: 0; 
+}
+
+
+/* --- Footer (Mantener) --- */
+.main-footer {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 1rem 0;
+    margin-top: 4rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------------------------------------------------- */
+/* --- ESTILOS MODERNOS PARA EL CONTENIDO DEL DASHBOARD --- */
+/* ---------------------------------------------------- */
+
+/* --- Variables CSS (Asegúrate de que estén definidas en tu archivo principal o en otro lugar accesible) --- */
+
+
+
+
+/* --- Sección de Bienvenida --- */
+.welcome-section {
+    background: linear-gradient(135deg, var(--primary-color), #0a3a6b); /* Degradado atractivo */
+    color: var(--light-text-color);
+    padding: 40px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-card {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-section h2 {
+    color: var(--light-text-color); /* Título en blanco */
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.welcome-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color); /* Icono con color secundario */
+}
+
+.welcome-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.welcome-section .lead-text {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+/* --- Botones generales (adaptados del layout principal pero para el admin) --- */
+.btn {
+    display: inline-flex; /* Para alinear íconos */
+    align-items: center;
+    gap: 8px; /* Espacio entre texto e ícono */
+    padding: 12px 25px;
+    border-radius: 50px; /* Bordes más redondeados */
+    font-weight: 600;
+    transition: all var(--transition-speed);
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+.btn-primary-alt {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-primary-alt:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-secondary-alt {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary-alt:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* --- ESTILOS PARA LOS BOTONES DE ACCIÓN EN TABLAS (CON ICONO Y TEXTO) --- */
+.action-btn {
+    display: inline-flex; /* Permite ícono y texto en la misma línea */
+    align-items: center; /* Alinea verticalmente el ícono y el texto */
+    gap: 6px; /* Espacio entre el ícono y el texto */
+    padding: 8px 14px; /* Relleno compacto pero visible */
+    border-radius: 25px; /* Bordes redondeados tipo "pastilla" */
+    font-size: 0.85rem; /* Tamaño de fuente para el texto del botón */
+    font-weight: 600;
+    text-decoration: none; /* Eliminar subrayado de los enlaces */
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1); /* Transición suave */
+    cursor: pointer;
+    border: none; /* Sin borde por defecto */
+    text-transform: uppercase; /* Texto en mayúsculas para un look consistente */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Sombra sutil */
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+/* Estilos de color para cada tipo de botón de acción */
+.action-btn.edit {
+    background-color: var(--info-color); /* Azul */
+    color: white;
+}
+.action-btn.edit:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+    transform: translateY(-2px);
+}
+
+.action-btn.view {
+    background-color: var(--success-color); /* Verde */
+    color: white;
+}
+.action-btn.view:hover {
+    background-color: #218838; /* Verde más oscuro */
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+    transform: translateY(-2px);
+}
+
+.action-btn.delete { /* Si añades un botón de eliminar */
+    background-color: var(--danger-color); /* Rojo */
+    color: white;
+}
+.action-btn.delete:hover {
+    background-color: #c82333; /* Rojo más oscuro */
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+    transform: translateY(-2px);
+}
+
+/* Ajustes del icono dentro de los botones de acción */
+.action-btn i {
+    font-size: 0.95rem; /* Ajusta el tamaño del ícono en relación al texto */
+}
+
+
+/* --- Sección de Licitaciones --- */
+.licitaciones-section {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 40px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: var(--border-light);
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- Tabla de Datos --- */
+.table-responsive {
+    overflow-x: auto; /* Para tablas que se desbordan en pantallas pequeñas */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate; /* Para border-radius en celdas */
+    border-spacing: 0; /* Elimina espacio entre celdas */
+    margin-top: 0; /* Ya no hay margen superior */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra un poco más prominente para la tabla */
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
+    background-color: white; /* Aseguramos un fondo blanco para la tabla */
+}
+
+.data-table th, .data-table td {
+    padding: 18px 22px; /* Aumentamos el padding para un look más espacioso */
+    text-align: left;
+    border-bottom: 1px solid #ededed; /* Borde más sutil */
+}
+
+/* Encabezados de tabla */
+.data-table th {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.95em; /* Ligeramente más grande */
+    position: sticky; /* Encabezados fijos al hacer scroll */
+    top: 0;
+    z-index: 2; /* Aseguramos que los encabezados estén por encima del contenido */
+    letter-spacing: 0.5px;
+}
+
+/* Primer y último th redondeados */
+.data-table th:first-child {
+    border-top-left-radius: var(--border-radius);
+}
+.data-table th:last-child {
+    border-top-right-radius: var(--border-radius);
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none; /* Elimina el borde inferior de la última fila */
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #fcfcfc; /* Rayado aún más sutil */
+}
+
+.data-table tbody tr:hover {
+    background-color: #eef7ff; /* Resaltar fila al pasar el mouse con un azul claro */
+    cursor: pointer;
+}
+
+/* **AJUSTE CLAVE PARA LA COLUMNA DE ACCIONES** */
+.data-table th:last-child,
+.data-table td:last-child {
+    min-width: 180px; /* **Aumentamos el ancho mínimo para acomodar texto y 2-3 botones** */
+    text-align: center; /* Centra el contenido de la última columna (header) */
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box; /* Asegura que padding no aumente el width */
+}
+
+.actions-cell {
+    display: flex; /* Usar flexbox para alinear los botones horizontalmente */
+    justify-content: center; /* Centrar los botones dentro de la celda */
+    gap: 8px; /* Espacio entre los botones */
+    align-items: center; /* Asegura que estén centrados verticalmente */
+    height: 100%; /* Asegura que el flexbox ocupe todo el alto de la celda */
+    white-space: nowrap; /* Mantiene los botones en una sola línea si hay espacio */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea si no hay espacio */
+}
+
+/* --- Estado Vacío (Empty State) --- */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f7f7f7;
+    border: 1px dashed #cccccc;
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+    color: #666;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+/* --- Media Queries (Responsividad - Ajustes adicionales para el dashboard) --- */
+
+@media (max-width: 1200px) { /* Nuevo breakpoint para ajustar el ancho de la columna de acciones en pantallas más grandes */
+    .data-table th:last-child,
+    .data-table td:last-child {
+        min-width: 160px;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-content {
+        padding: 0 15px;
+    }
+    .welcome-section h2 {
+        font-size: 2rem;
+    }
+    .welcome-section p {
+        font-size: 1rem;
+    }
+    .welcome-section .lead-text {
+        font-size: 1.2rem;
+    }
+    .data-table th, .data-table td {
+        padding: 12px 15px;
+    }
+    /* Ajustes para los action-btn en tablet */
+    .action-btn {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+        gap: 5px;
+    }
+    .action-btn i {
+        font-size: 0.85rem;
+    }
+    .data-table th:last-child,
+    .data-table td:last-child {
+        min-width: 140px; /* Ajuste para tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px; /* Ajuste para la barra de navegación en móvil */
+    }
+    .welcome-section {
+        padding: 30px 15px;
+    }
+    .welcome-section h2 {
+        font-size: 1.8rem;
+    }
+    .welcome-icon {
+        font-size: 3rem;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .data-table {
+        font-size: 0.9em;
+    }
+    .data-table th, .data-table td {
+        padding: 10px 12px;
+    }
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .section-header h3 {
+        font-size: 1.6rem;
+    }
+    /* Ajustes para los action-btn en móvil */
+    .action-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        gap: 4px;
+    }
+    .action-btn i {
+        font-size: 0.8rem;
+    }
+    .actions-cell {
+        flex-direction: row; /* Mantener en fila por defecto, permitir wrap */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px; /* Ajuste de gap */
+    }
+    .data-table th:last-child,
+    .data-table td:last-child {
+        min-width: 120px; /* Ajuste para móviles */
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section h2 {
+        font-size: 1.5rem;
+    }
+    .welcome-section p {
+        font-size: 0.9rem;
+    }
+    .welcome-section .lead-text {
+        font-size: 1rem;
+    }
+    .btn {
+        width: 100%; /* Botones generales anchos en móvil */
+        margin-bottom: 10px;
+    }
+    .actions-cell {
+        flex-direction: column; /* Apilar los botones en pantallas muy pequeñas */
+        align-items: center;
+        gap: 8px; /* Espacio vertical entre botones */
+    }
+    /* Ajustes para los action-btn en móviles muy pequeños */
+    .action-btn {
+        width: auto; /* Permite que el ancho se ajuste al contenido */
+        padding: 8px 12px; /* Un poco más de padding para el toque */
+        font-size: 0.8rem; /* Tamaño de fuente ligeramente mayor */
+        gap: 6px;
+        margin: 0 2px; /* Reducir margen horizontal para ahorrar espacio */
+    }
+    .data-table th:last-child,
+    .data-table td:last-child {
+        min-width: 100px; /* Ajuste para móviles muy pequeños */
+    }
+}

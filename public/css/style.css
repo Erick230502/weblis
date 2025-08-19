@@ -1,0 +1,426 @@
+/* --- Variables CSS --- */
+:root {
+    --primary-color: #0E457A; /* Azul Jeguen */
+    --secondary-color: #f49e13; 
+    --text-color: #343a40;
+    --light-text-color: #f8f9fa;
+    --background-light: #f8f9fa;
+    --background-dark: #212529;
+    --border-radius: 8px;
+    --transition-speed: 0.3s ease;
+}
+
+/* --- Reseteo Básico y Tipografía --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", "Open Sans", sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-light);
+    overflow-x: hidden;
+    /* Añadido: padding-top para compensar la altura de la cabecera fija */
+    padding-top: 110px; /* Ajusta este valor si la altura de tu header cambia */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Contenedor General --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Botones (CTAs) --- */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all var(--transition-speed);
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+/* --- Header y Navbar --- */
+.main-header {
+    background-color: #0E457A;
+    box-shadow: 3px 0 16px rgba(0, 0, 0, 0.8);
+    /* Modificado: position: fixed para mantener la barra en la parte superior */
+    position: fixed; 
+    top: 0;
+    left: 0; /* Asegura que se alinee a la izquierda */
+    width: 100%; /* Ocupa el ancho completo */
+    z-index: 1000;
+    /* Eliminado: margin-bottom: -32px; ya no es necesario con position: fixed */
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 90px; 
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-left: -5rem; 
+    background-color: white; 
+    padding: 0.5rem 1rem; 
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0);
+}
+
+/* Eliminamos el pseudo-elemento del navbar porque ahora el fondo blanco lo reemplaza */
+.navbar::before {
+    content: none; /* Elimina el pseudo-elemento que creaba el gradiente */
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--light-text-color);
+    transition: opacity var(--transition-speed);
+}
+
+.logo-link:hover {
+    opacity: 0.9;
+}
+
+.logo {
+    height: 110px;
+    margin-right: 1.5rem;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.6)); 
+    border-radius: 5px;
+}
+
+.brand-text h1 {
+    /* MODIFICADO: Menos espacio debajo de JEGUEN */
+    margin: 0; /* Elimina el margin-bottom */
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: -0.8px;
+    color: var(--primary-color);
+}
+
+.brand-text .tagline {
+    margin: 0; 
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--text-color); 
+    line-height: 1.2;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links .nav-item {
+    font-family: "Montserrat", "Open Sans", sans-serif;
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-weight: 275;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color var(--transition-speed);
+    letter-spacing: 0.5px;
+}
+
+.nav-links .nav-item:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.nav-links .nav-item::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-color);
+    transition: width var(--transition-speed) ease-in-out;
+}
+
+.nav-links .nav-item:hover::before {
+    width: 100%;
+}
+
+/* --- Menú Hamburguesa (Mobile) --- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 0;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--light-text-color);
+    border-radius: 5px;
+    transition: all var(--transition-speed);
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* --- Contenido Principal --- */
+#main-content {
+    min-height: calc(100vh - 200px); 
+    padding-top: 0; 
+}
+
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 1rem 0;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.footer-section p, .footer-section ul {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.7rem;
+}
+
+.footer-section ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--transition-speed);
+}
+
+.footer-section ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-section .fas {
+    margin-right: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Media Queries (Responsividad) --- */
+
+@media (max-width: 992px) {
+    .nav-links {
+        gap: 1.5rem;
+    }
+    .brand-text h1 {
+        font-size: 1.8rem;
+    }
+    .brand-text .tagline {
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+    .logo {
+        height: 65px;
+    }
+    .logo-area {
+        margin-left: -0.5rem;
+        padding: 0.3rem 0.8rem; /* Ajustar padding para tablets */
+    }
+    /* Ajuste para el padding-top del body en pantallas medianas */
+    body {
+        padding-top: 80px; /* Reducir si el header se hace más pequeño */
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-color);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-100%);
+        transition: transform var(--transition-speed) ease-in-out;
+        padding: 1rem 0;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    .nav-links li:last-child {
+        margin-top: 1rem;
+    }
+
+    .nav-links .nav-item, .nav-links .btn {
+        display: block;
+        padding: 0.8rem 1rem;
+    }
+
+    .logo-area {
+        justify-content: center;
+        flex-grow: 1;
+        margin-left: 0; /* Eliminar el margen negativo en móvil */
+        background-color: white; /* Mantener fondo blanco en móvil */
+        border-radius: 5px; /* Ajustar bordes para móvil */
+        box-shadow: none; /* Eliminar sombra extra en móvil para simplicidad */
+    }
+    .navbar::before {
+        display: none;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        min-width: unset;
+        width: 100%;
+    }
+    .footer-section ul {
+        padding: 0;
+    }
+    /* Ajuste para el padding-top del body en pantallas pequeñas */
+    body {
+        padding-top: 70px; /* Reducir si el header se hace más pequeño */
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-text h1 {
+        font-size: 1.5rem;
+    }
+    .brand-text .tagline {
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+    .logo {
+        height: 50px;
+        margin-right: 0.5rem;
+    }
+    .navbar {
+        padding: 0.8rem;
+        min-height: 70px;
+    }
+}

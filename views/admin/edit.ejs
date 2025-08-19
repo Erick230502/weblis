@@ -1,0 +1,772 @@
+
+    <link rel="stylesheet" href="/css/admin/admin-forms.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/form-logic.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica para precargar los bloques de detalle existentes
+            const itemDetailsData = <%- JSON.stringify(profile.itemDetails) %>;
+            if (itemDetailsData && itemDetailsData.length > 0) {
+                itemDetailsData.forEach((itemDetail, index) => {
+                    addDetailItemBlock(itemDetail, index);
+                });
+            }
+        });
+    </script>
+
+    <style>
+    .form-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+    .form-container .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #eee;
+    }
+    .form-container h1 {
+        color: #333;
+        font-size: 2.5em;
+        margin: 0;
+        font-weight: 700;
+    }
+    .form-container h2 {
+        color: #007bff; /* Primary blue */
+        font-size: 1.8em;
+        margin-top: 35px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed #cce5ff; /* Light blue dashed line */
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+    }
+    .form-container h2 i {
+        margin-right: 10px;
+        color: #007bff;
+    }
+    .form-container h3 {
+        color: #555;
+        font-size: 1.4em;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        font-weight: 600;
+    }
+    .back-button {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 0.9em;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+    }
+    .back-button i {
+        margin-right: 8px;
+    }
+    .back-button:hover {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        width: calc(100% - 24px); /* Adjusted for padding */
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+    .form-group input[type="text"]:focus,
+    .form-group input[type="number"]:focus,
+    .form-group input[type="email"]:focus,
+    .form-group textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    .form-group input[type="checkbox"] {
+        margin-top: 10px;
+        transform: scale(1.2);
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    .form-group small {
+        display: block;
+        margin-top: 5px;
+        color: #777;
+        font-size: 0.85em;
+    }
+    
+    /* Section Card for visual grouping */
+    .section-card {
+        background-color: #f9f9f9;
+        border: 1px solid #e9e9e9;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* Dynamic Item Blocks */
+    .dynamic-item-block {
+        border: 1px solid #e0e0e0;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    }
+    .dynamic-item-block h4 {
+        margin-top: 0;
+        color: #444;
+        font-size: 1.2em;
+        border-bottom: 1px dashed #eee;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    .dynamic-item-block .remove-item-button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: #dc3545;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85em;
+        transition: background-color 0.3s ease;
+    }
+    .dynamic-item-block .remove-item-button:hover {
+        background-color: #c82333;
+    }
+
+    /* Inner blocks for detailItemSchema's contentSections */
+    .detail-content-block {
+        border: 1px solid #cce5ff; /* Light blue border */
+        background-color: #eaf6ff; /* Light blue background */
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        position: relative;
+    }
+    .detail-content-block h5 {
+        margin-top: 0;
+        color: #0056b3;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    .detail-content-block .remove-item-button { /* Override for smaller button */
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+
+    /* Buttons */
+    .add-item-button, .submit-button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.05em;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .add-item-button {
+        background-color: #17a2b8; /* Info blue */
+        color: white;
+        margin-top: 20px;
+        box-shadow: 0 4px 10px rgba(23, 162, 184, 0.2);
+    }
+    .add-item-button:hover {
+        background-color: #138496;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(23, 162, 184, 0.3);
+    }
+    .add-item-button i {
+        margin-right: 8px;
+    }
+    .submit-button {
+        background-color: #28a745; /* Success green */
+        color: white;
+        width: 100%;
+        padding: 18px;
+        margin-top: 30px;
+        font-size: 1.2em;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+    .submit-button:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+    .submit-button i {
+        margin-right: 10px;
+    }
+
+    .form-actions {
+        margin-top: 40px;
+        border-top: 2px solid #eee;
+        padding-top: 30px;
+        text-align: right;
+    }
+
+    .empty-list-message {
+        color: #888;
+        font-style: italic;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .form-container {
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-container h1 {
+            font-size: 2em;
+        }
+        .form-container h2 {
+            font-size: 1.5em;
+        }
+        .back-button, .add-item-button, .submit-button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px 15px;
+            font-size: 0.95em;
+        }
+        .dynamic-item-block .remove-item-button {
+            position: static;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<div class="form-container">
+    <div class="header">
+        <h1><i class="fas fa-edit"></i> <%= title %></h1>
+        <a href="/admin" class="back-button">
+            <i class="fas fa-arrow-left"></i> Volver al Dashboard
+        </a>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div id="server-message" style="display:none;" data-type="error" data-message="<%= error %>"></div>
+    <% } %>
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div id="server-message" style="display:none;" data-type="success" data-message="<%= success %>"></div>
+    <% } %>
+
+    <form action="/admin/profiles/edit/<%= profile.id %>?_method=PUT" method="POST" class="dynamic-form">
+
+        <section class="general-info-section">
+            <h2><i class="fas fa-info-circle"></i> Información General del Perfil</h2>
+            <div class="form-group">
+                <label for="profileName">Nombre del Perfil:</label>
+                <input type="text" id="profileName" name="profileName" value="<%= profile.profileName %>" required>
+                <small>Nombre único para identificar este perfil en el panel de administración.</small>
+            </div>
+            <div class="form-group">
+                <label for="slug">Slug (URL amigable):</label>
+                <input type="text" id="slug" name="slug" value="<%= profile.slug %>" required pattern="[a-z0-9-]+$" title="Solo minúsculas, números y guiones. Ej: mi-nuevo-perfil">
+                <small>Usado en la URL pública (ej. /licitacion/mi-nuevo-perfil). Solo minúsculas, números y guiones. Debe ser único.</small>
+            </div>
+            <div class="form-group">
+                <label for="isActive">Activo:</label>
+                <input type="checkbox" id="isActive" name="isActive" <%= profile.isActive ? 'checked' : '' %>>
+                <small>Marca para que este perfil esté visible públicamente en el sitio.</small>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-tools"></i> Sección "SERVICIOS ESPECIALIZADOS"</h2>
+            <div class="form-group">
+                <label for="specializedServices_title">Título de la Sección:</label>
+                <input type="text" id="specializedServices_title" name="specializedServices[title]" value="<%= profile.specializedServices ? profile.specializedServices.title : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="specializedServices_introText">Texto Introductorio:</label>
+                <textarea id="specializedServices_introText" name="specializedServices[introText]" rows="3"><%= profile.specializedServices ? profile.specializedServices.introText : '' %></textarea>
+            </div>
+            <h3>Ítems de Equipamiento/Servicio Especializado</h3>
+            <div id="specialized-items-container">
+                <% if (profile.specializedServices && profile.specializedServices.items && profile.specializedServices.items.length > 0) { %>
+                    <% profile.specializedServices.items.forEach(function(item, index) { %>
+                        <%- include('partials/specializedItemBlock', { item: item, index: index, parentFieldName: 'specializedServices[items]' }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay ítems de equipamiento/servicio. Añade uno:</p>
+                <% } %>
+            </div>
+            <button type="button" id="add-specialized-item-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Ítem Especializado</button>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-star"></i> Sección Hero (Página Principal)</h2>
+            <div class="form-group">
+                <label for="heroSection_mainTitle">Título Principal:</label>
+                <input type="text" id="heroSection_mainTitle" name="heroSection[mainTitle]" value="<%= profile.heroSection ? profile.heroSection.mainTitle : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="heroSection_tagline">Subtítulo / Eslogan:</label>
+                <input type="text" id="heroSection_tagline" name="heroSection[tagline]" value="<%= profile.heroSection ? profile.heroSection.tagline : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="heroSection_image">URL de Imagen de Fondo Hero:</label>
+                <input type="text" id="heroSection_image" name="heroSection[image]" value="<%= profile.heroSection ? profile.heroSection.image : '' %>">
+                <small>URL de la imagen destacada para el encabezado principal.</small>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-building"></i> Sección "Nosotros"</h2>
+            <div class="form-group">
+                <label for="aboutUsSection_image">URL de Imagen "Nosotros":</label>
+                <input type="text" id="aboutUsSection_image" name="aboutUsSection[image]" value="<%= profile.aboutUsSection ? profile.aboutUsSection.image : '' %>">
+            </div>
+            <h3>Párrafos de Texto "Nosotros"</h3>
+            <div id="about-us-paragraphs-container">
+                <% if (profile.aboutUsSection && profile.aboutUsSection.textParagraphs && profile.aboutUsSection.textParagraphs.length > 0) { %>
+                    <% profile.aboutUsSection.textParagraphs.forEach(function(paragraph, index) { %>
+                        <%- include('partials/paragraphBlock', { paragraph: paragraph, index: index, fieldName: 'aboutUsSection[textParagraphs]' }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay párrafos de "Nosotros". Añade uno:</p>
+                <% } %>
+            </div>
+            <button type="button" id="add-about-us-paragraph-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Párrafo "Nosotros"</button>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-brain"></i> Sección "Filosofía"</h2>
+            <div class="form-group">
+                <label for="philosophySection_mision_text">Misión:</label>
+                <textarea id="philosophySection_mision_text" name="philosophySection[mision][text]" rows="3"><%= profile.philosophySection && profile.philosophySection.mision ? profile.philosophySection.mision.text : '' %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="philosophySection_vision_text">Visión:</label>
+                <textarea id="philosophySection_vision_text" name="philosophySection[vision][text]" rows="3"><%= profile.philosophySection && profile.philosophySection.vision ? profile.philosophySection.vision.text : '' %></textarea>
+            </div>
+            <h3>Valores</h3>
+            <div id="valores-items-container">
+                <% if (profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items && profile.philosophySection.valores.items.length > 0) { %>
+                    <% profile.philosophySection.valores.items.forEach(function(item, index) { %>
+                        <%- include('partials/valueBlock', { value: item, index: index, fieldName: 'philosophySection[valores][items]' }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay valores definidos. Añade uno:</p>
+                <% } %>
+            </div>
+            <button type="button" id="add-valor-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Valor</button>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-list"></i> Sección "Servicios" (Carrusel)</h2>
+            <div class="form-group">
+                <label for="servicesOverview_introText">Texto Introductorio del Carrusel:</label>
+                <textarea id="servicesOverview_introText" name="servicesOverview[introText]" rows="3"><%= profile.servicesOverview ? profile.servicesOverview.introText : '' %></textarea>
+            </div>
+            <h3>Slides del Carrusel de Servicios</h3>
+            <div id="service-slides-container">
+                <% if (profile.servicesOverview && profile.servicesOverview.slides && profile.servicesOverview.slides.length > 0) { %>
+                    <% profile.servicesOverview.slides.forEach(function(slide, index) { %>
+                        <%- include('partials/serviceSlideBlock', { slide: slide, index: index, parentFieldName: 'servicesOverview[slides]' }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay slides de servicio. Añade uno:</p>
+                <% } %>
+            </div>
+            <button type="button" id="add-service-slide-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Slide de Servicio</button>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-handshake"></i> Sección "Clientes"</h2>
+            <h3>Logos de Clientes</h3>
+            <div id="client-logos-container">
+                <% if (profile.clientsSection && profile.clientsSection.clientLogos && profile.clientsSection.clientLogos.length > 0) { %>
+                    <% profile.clientsSection.clientLogos.forEach(function(logo, index) { %>
+                        <%- include('partials/clientLogoBlock', { logo: logo, index: index, parentFieldName: 'clientsSection[clientLogos]' }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay logos de clientes. Añade uno:</p>
+                <% } %>
+            </div>
+            <button type="button" id="add-client-logo-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Logo de Cliente</button>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-address-book"></i> Sección "Contáctanos"</h2>
+            <div class="form-group">
+                <label for="contactSection_direction">Dirección:</label>
+                <input type="text" id="contactSection_direction" name="contactSection[direction]" value="<%= profile.contactSection ? profile.contactSection.direction : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="contactSection_telefono">Teléfono:</label>
+                <input type="text" id="contactSection_telefono" name="contactSection[telefono]" value="<%= profile.contactSection ? profile.contactSection.telefono : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="contactSection_correo">Correo:</label>
+                <input type="email" id="contactSection_correo" name="contactSection[correo]" value="<%= profile.contactSection ? profile.contactSection.correo : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="contactSection_horario1">Horario 1:</label>
+                <input type="text" id="contactSection_horario1" name="contactSection[horario1]" value="<%= profile.contactSection ? profile.contactSection.horario1 : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="contactSection_horario2">Horario 2:</label>
+                <input type="text" id="contactSection_horario2" name="contactSection[horario2]" value="<%= profile.contactSection ? profile.contactSection.horario2 : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="contactSection_contactImage">URL de Imagen de Contacto:</label>
+                <input type="text" id="contactSection_contactImage" name="contactSection[contactImage]" value="<%= profile.contactSection ? profile.contactSection.contactImage : '' %>">
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2><i class="fas fa-file-alt"></i> Sección "PÁGINA DE DETALLE"</h2>
+            <p>Esta sección creará una página de detalle general para todos los servicios. Solo necesitas añadir un bloque de detalle.</p>
+            <div id="item-details-container">
+                <% if (profile.itemDetails && profile.itemDetails.length > 0) { %>
+                    <% profile.itemDetails.forEach(function(itemDetail, mainIndex) { %>
+                        <%- include('partials/detailItemBlock', { itemDetail: itemDetail, mainIndex: mainIndex }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay páginas de detalle de ítems. Añade una:</p>
+                <% } %>
+            </div>
+            <button type="button" id="add-item-detail-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Página de Detalle</button>
+        </section>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-button"><i class="fas fa-save"></i> Guardar Cambios</button>
+            <a href="/admin" class="cancel-button"><i class="fas fa-times-circle"></i> Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializa los contadores con el número de ítems existentes
+        let specializedItemIndex = <%= profile.specializedServices && profile.specializedServices.items ? profile.specializedServices.items.length : 0 %>;
+        let aboutUsParagraphIndex = <%= profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.length : 0 %>;
+        let valorIndex = <%= profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.length : 0 %>;
+        let serviceSlideIndex = <%= profile.servicesOverview && profile.servicesOverview.slides ? profile.servicesOverview.slides.length : 0 %>;
+        let clientLogoIndex = <%= profile.clientsSection && profile.clientsSection.clientLogos ? profile.clientsSection.clientLogos.length : 0 %>;
+        let detailItemMainIndex = <%= profile.itemDetails ? profile.itemDetails.length : 0 %>;
+        let detailContentIndex = 0; // Para los bloques anidados de Item Details
+
+        // Función para añadir el listener de eliminación
+        function addRemoveListener(block) {
+            const removeButton = block.querySelector('.remove-item-button');
+            if (removeButton) {
+                removeButton.addEventListener('click', function() {
+                    Swal.fire({
+                        title: '¿Eliminar ítem?',
+                        text: "Esta acción no se puede deshacer.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc3545',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            block.remove();
+                        }
+                    });
+                });
+            }
+        }
+        
+        // --- Funciones para añadir nuevos bloques ---
+
+        // Función para Specialized Item
+        function addSpecializedItemBlock() {
+            const container = document.getElementById('specialized-items-container');
+            const newIndex = specializedItemIndex++;
+            const newBlockHtml = `
+                <div class="dynamic-item-block">
+                    <h4>Ítem Especializado #${newIndex + 1}</h4>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    <div class="form-group">
+                        <label for="specializedServices_items_${newIndex}_name">Nombre:</label>
+                        <input type="text" id="specializedServices_items_${newIndex}_name" name="specializedServices[items][${newIndex}][name]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="specializedServices_items_${newIndex}_image">URL de Imagen:</label>
+                        <input type="text" id="specializedServices_items_${newIndex}_image" name="specializedServices[items][${newIndex}][image]">
+                    </div>
+                    <div class="form-group">
+                        <label for="specializedServices_items_${newIndex}_description">Descripción:</label>
+                        <textarea id="specializedServices_items_${newIndex}_description" name="specializedServices[items][${newIndex}][description]" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="specializedServices_items_${newIndex}_detailSlug">Slug de Página de Detalle:</label>
+                        <input type="text" id="specializedServices_items_${newIndex}_detailSlug" name="specializedServices[items][${newIndex}][detailSlug]">
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+        }
+
+        // Función para About Us Paragraphs
+        function addAboutUsParagraphBlock() {
+            const container = document.getElementById('about-us-paragraphs-container');
+            const newIndex = aboutUsParagraphIndex++;
+            const newBlockHtml = `
+                <div class="paragraph-block">
+                    <h5>Párrafo de "Nosotros" #${newIndex + 1}</h5>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    <div class="form-group">
+                        <label for="aboutUsSection_textParagraphs_${newIndex}">Texto del Párrafo:</label>
+                        <textarea id="aboutUsSection_textParagraphs_${newIndex}" name="aboutUsSection[textParagraphs][${newIndex}]" rows="4"></textarea>
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+        }
+
+        // Función para Valores
+        function addValorBlock() {
+            const container = document.getElementById('valores-items-container');
+            const newIndex = valorIndex++;
+            const newBlockHtml = `
+                <div class="value-block">
+                    <h5>Valor #${newIndex + 1}</h5>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    <div class="form-group">
+                        <label for="philosophySection_valores_items_${newIndex}">Texto del Valor:</label>
+                        <textarea id="philosophySection_valores_items_${newIndex}" name="philosophySection[valores][items][${newIndex}]" rows="2"></textarea>
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+        }
+
+        // Función para Service Slides
+        function addServiceSlideBlock() {
+            const container = document.getElementById('service-slides-container');
+            const newIndex = serviceSlideIndex++;
+            const newBlockHtml = `
+                <div class="service-slide-block">
+                    <h4>Slide de Servicio #${newIndex + 1}</h4>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    <div class="form-group">
+                        <label for="servicesOverview_slides_${newIndex}_name">Nombre:</label>
+                        <input type="text" id="servicesOverview_slides_${newIndex}_name" name="servicesOverview[slides][${newIndex}][name]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicesOverview_slides_${newIndex}_image">URL de Imagen:</label>
+                        <input type="text" id="servicesOverview_slides_${newIndex}_image" name="servicesOverview[slides][${newIndex}][image]">
+                    </div>
+                    <div class="form-group">
+                        <label for="servicesOverview_slides_${newIndex}_detailSlug">Slug de Página de Detalle:</label>
+                        <input type="text" id="servicesOverview_slides_${newIndex}_detailSlug" name="servicesOverview[slides][${newIndex}][detailSlug]">
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+        }
+
+        // Función para Client Logos
+        function addClientLogoBlock() {
+            const container = document.getElementById('client-logos-container');
+            const newIndex = clientLogoIndex++;
+            const newBlockHtml = `
+                <div class="client-logo-block">
+                    <h5>Logo de Cliente #${newIndex + 1}</h5>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    <div class="form-group">
+                        <label for="clientsSection_clientLogos_${newIndex}_image">URL del Logo:</label>
+                        <input type="text" id="clientsSection_clientLogos_${newIndex}_image" name="clientsSection[clientLogos][${newIndex}][image]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientsSection_clientLogos_${newIndex}_altText">Texto Alternativo:</label>
+                        <input type="text" id="clientsSection_clientLogos_${newIndex}_altText" name="clientsSection[clientLogos][${newIndex}][altText]">
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+        }
+
+        // Función para los bloques anidados de contenido dentro de los detalles
+        function addDetailContentBlock(containerId, mainIndex) {
+            const container = document.getElementById(containerId);
+            const newIndex = detailContentIndex++;
+            const newBlockHtml = `
+                <div class="detail-content-block">
+                    <h5>Bloque de Contenido #${newIndex + 1}</h5>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i></button>
+                    <div class="form-group">
+                        <label for="itemDetails_${mainIndex}_contentSections_${newIndex}_title">Título del Bloque:</label>
+                        <input type="text" id="itemDetails_${mainIndex}_contentSections_${newIndex}_title" name="itemDetails[${mainIndex}][contentSections][${newIndex}][title]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDetails_${mainIndex}_contentSections_${newIndex}_text">Texto del Bloque:</label>
+                        <textarea id="itemDetails_${mainIndex}_contentSections_${newIndex}_text" name="itemDetails[${mainIndex}][contentSections][${newIndex}][text]" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDetails_${mainIndex}_contentSections_${newIndex}_image">URL de Imagen del Bloque:</label>
+                        <input type="text" id="itemDetails_${mainIndex}_contentSections_${newIndex}_image" name="itemDetails[${mainIndex}][contentSections][${newIndex}][image]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDetails_${mainIndex}_contentSections_${newIndex}_imageCaption">Pie de Foto de Imagen:</label>
+                        <input type="text" id="itemDetails_${mainIndex}_contentSections_${newIndex}_imageCaption" name="itemDetails[${mainIndex}][contentSections][${newIndex}][imageCaption]">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDetails_${mainIndex}_contentSections_${newIndex}_isReversed">Imagen a la Izquierda (Invertir Layout):</label>
+                        <input type="checkbox" id="itemDetails_${mainIndex}_contentSections_${newIndex}_isReversed" name="itemDetails[${mainIndex}][contentSections][${newIndex}][isReversed]">
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+        }
+
+        // Función para los Item Details
+        function addDetailItemBlock() {
+            const container = document.getElementById('item-details-container');
+            const newMainIndex = detailItemMainIndex++;
+            const newBlockHtml = `
+                <div class="dynamic-item-block detail-item-section card mb-3">
+                    <div class="card-body">
+                        <h3>Página de Detalle de Ítem #${newMainIndex + 1}</h3>
+                        <button type="button" class="remove-item-button btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Eliminar Página de Detalle</button>
+                        
+                        <h4><i class="fas fa-heading"></i> Sección Hero del Detalle</h4>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_itemSlug">Slug del Ítem (URL):</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_itemSlug" name="itemDetails[${newMainIndex}][itemSlug]" pattern="[a-z0-9-]+$" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_hero_title">Título Hero:</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_hero_title" name="itemDetails[${newMainIndex}][hero][title]" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_hero_subtitle">Subtítulo Hero:</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_hero_subtitle" name="itemDetails[${newMainIndex}][hero][subtitle]">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_hero_backgroundImage">URL de Imagen de Fondo Hero:</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_hero_backgroundImage" name="itemDetails[${newMainIndex}][hero][backgroundImage]">
+                        </div>
+        
+                        <h4><i class="fas fa-pencil-alt"></i> Introducción del Detalle</h4>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_intro_paragraph1">Párrafo Introductorio 1:</label>
+                            <textarea id="itemDetails_${newMainIndex}_intro_paragraph1" name="itemDetails[${newMainIndex}][intro][paragraph1]" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_intro_paragraph2">Párrafo Introductorio 2:</label>
+                            <textarea id="itemDetails_${newMainIndex}_intro_paragraph2" name="itemDetails[${newMainIndex}][intro][paragraph2]" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_intro_paragraph3">Párrafo Introductorio 3:</label>
+                            <textarea id="itemDetails_${newMainIndex}_intro_paragraph3" name="itemDetails[${newMainIndex}][intro][paragraph3]" rows="3"></textarea>
+                        </div>
+        
+                        <h4><i class="fas fa-file-text"></i> Bloques de Contenido del Detalle</h4>
+                        <div id="item-details-content-sections-container-${newMainIndex}">
+                            <p class="empty-list-message">Aún no hay bloques de contenido. Añade uno:</p>
+                        </div>
+                        <button type="button" class="add-content-block-btn add-item-button" data-main-index="${newMainIndex}"><i class="fas fa-plus-circle"></i> Añadir Bloque de Contenido</button>
+        
+                        <h4><i class="fas fa-phone"></i> Información de Contacto del Detalle</h4>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_contactInfo_title">Título de Contacto:</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_contactInfo_title" name="itemDetails[${newMainIndex}][contactInfo][title]">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_contactInfo_companyName">Nombre de la Compañía (Contacto):</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_contactInfo_companyName" name="itemDetails[${newMainIndex}][contactInfo][companyName]">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_contactInfo_companyDetail">Detalle de la Compañía (Contacto):</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_contactInfo_companyDetail" name="itemDetails[${newMainIndex}][contactInfo][companyDetail]">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_contactInfo_phone">Teléfono de Contacto:</label>
+                            <input type="text" id="itemDetails_${newMainIndex}_contactInfo_phone" name="itemDetails[${newMainIndex}][contactInfo][phone]">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDetails_${newMainIndex}_contactInfo_email">Correo de Contacto:</label>
+                            <input type="email" id="itemDetails_${newMainIndex}_contactInfo_email" name="itemDetails[${newMainIndex}][contactInfo][email]">
+                        </div>
+                    </div>
+                </div>
+            `;
+            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
+            container.appendChild(newBlock);
+            addRemoveListener(newBlock);
+
+            // Añade el listener para el botón de "Añadir Bloque de Contenido" dentro del nuevo bloque de detalle
+            newBlock.querySelector('.add-content-block-btn').addEventListener('click', function() {
+                addDetailContentBlock(`item-details-content-sections-container-${newMainIndex}`, newMainIndex);
+            });
+        }
+        
+        // --- Listeners para los botones de "Añadir" ---
+        document.getElementById('add-specialized-item-btn').addEventListener('click', addSpecializedItemBlock);
+        document.getElementById('add-about-us-paragraph-btn').addEventListener('click', addAboutUsParagraphBlock);
+        document.getElementById('add-valor-btn').addEventListener('click', addValorBlock);
+        document.getElementById('add-service-slide-btn').addEventListener('click', addServiceSlideBlock);
+        document.getElementById('add-client-logo-btn').addEventListener('click', addClientLogoBlock);
+        document.getElementById('add-item-detail-btn').addEventListener('click', addDetailItemBlock);
+
+        // --- Precargar listeners de eliminación para los elementos que ya existen ---
+        document.querySelectorAll('.dynamic-item-block').forEach(addRemoveListener);
+        document.querySelectorAll('.detail-content-block').forEach(addRemoveListener);
+
+        // --- Precargar listeners para los botones de añadir contenido dentro de los bloques de detalle existentes ---
+        document.querySelectorAll('.add-content-block-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const mainIndex = this.getAttribute('data-main-index');
+                addDetailContentBlock(`item-details-content-sections-container-${mainIndex}`, mainIndex);
+            });
+        });
+    });
+</script>

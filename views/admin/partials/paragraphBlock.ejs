@@ -1,0 +1,8 @@
+<div class="dynamic-item-block">
+    <h4>Párrafo #<%= index + 1 %></h4>
+    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+    <div class="form-group">
+        <label for="<%= fieldName %>_<%= index %>">Párrafo:</label>
+        <textarea id="<%= fieldName %>_<%= index %>" name="<%= fieldName %>[<%= index %>]" rows="4" required><%= paragraph || '' %></textarea>
+    </div>
+</div>

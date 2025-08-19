@@ -1,0 +1,8 @@
+<div class="dynamic-item-block">
+    <h4>Valor #<%= index + 1 %></h4>
+    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+    <div class="form-group">
+        <label for="<%= fieldName %>_<%= index %>">Texto del Valor:</label>
+        <input type="text" id="<%= fieldName %>_<%= index %>" name="<%= fieldName %>[<%= index %>]" value="<%= value || '' %>" required>
+    </div>
+</div>

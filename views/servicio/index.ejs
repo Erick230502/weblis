@@ -1,0 +1,1221 @@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+    /*------------------------- ESTILOS GENERALES -------------------------*/
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    :root {
+        --primary-color: #1a4f8a;
+        --secondary-color: #ff9500ff; 
+        --light-text-color: #f8f9fa; 
+        --dark-text-color: #333333; 
+        --background-light: #f8f9fa; 
+        --border-radius: 8px;
+        --transition-speed: 0.3s ease-in-out;
+        --dark-blue-overlay: rgba(13, 70, 124, 0.7);
+    }
+
+    body {
+        font-family: "Montserrat", Arial, sans-serif;
+        box-sizing: border-box;
+        color: var(--dark-text-color);
+        background-color: white;
+    }
+
+    *, *::before, *::after {
+        box-sizing: inherit;
+    }
+
+    /*------------------------- ESTILOS DE CONTENEDOR GENERAL PARA CONSISTENCIA -------------------------*/
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+        margin-top: 150px;
+    }
+
+    /*------------------------- ESTILOS DE BOTONES -------------------------*/
+    .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background-color: #153c69; 
+        border-color: #153c69;
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+    }
+
+    .mt-4 { margin-top: 1.5rem; }
+    .mt-5 { margin-top: 3rem; }
+    .mb-4 { margin-bottom: 1.5rem; }
+    .text-center { text-align: center; }
+
+    /*------------------------- SECCIÓN DE SERVICIOS ESPECIALES -------------------------*/
+    .special-showcase-section {
+        background-color: #f0f4f7; 
+        border-bottom: 2px solid #dae1e7; 
+        text-align: center; 
+    }
+
+    .intro-section {
+        margin-bottom: 60px;
+        margin-top: 160px;
+    }
+
+    .section-title-special {
+        font-size: 3em; 
+        color: #002244; 
+        margin-bottom: 20px;
+        font-weight: 800; 
+        letter-spacing: -0.5px; 
+        text-transform: uppercase; 
+    }
+
+    .special-intro {
+        font-size: 1.25em; 
+        color: #333;
+        max-width: 950px; 
+        margin: 0 auto 30px auto;
+        line-height: 1.7; 
+        font-weight: 400;
+        text-align: justify;
+    }
+
+    .special-items-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px; 
+        margin-bottom: 20px;
+    }
+
+    .grid-title { 
+        width: 100%; 
+        font-size: 2.2em;
+        color: #003366;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .special-item {
+        background-color: var(--background-light);
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        padding: 2rem;
+        text-align: center;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: hidden; 
+        margin-top: 20px;
+    }
+
+    .special-item:hover {
+        transform: translateY(-8px) scale(1.02); 
+        box-shadow: 0 10px 55px rgba(0, 0, 0, 0.4); 
+    }
+
+    .special-item-img {
+        width: 100%;
+        height: 280px; 
+        object-fit: cover;
+        flex-shrink: 0;
+        border-bottom: 4px solid #0056b3; 
+    }
+
+    .special-item-content {
+        padding: 30px; 
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: left; 
+    }
+
+    .special-item-content h3 {
+        font-size: 2em; 
+        color: #003366; 
+        margin-bottom: 10px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .special-item-content p {
+        font-size: 1.1em; 
+        color: #444; 
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 20px; 
+    }
+
+    .call-to-action {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px; 
+        background-color: #0056b3; 
+        color: #ffffff; 
+        border-radius: 5px; 
+        font-weight: 700; 
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        align-self: flex-start; 
+    }
+
+    .call-to-action:hover {
+        background-color: #003d80; 
+        transform: translateY(-2px); 
+        text-decoration: none; 
+    }
+
+    /*------------------------- HERO SECTION (BANNER) -------------------------*/
+    .hero-section {
+        background: linear-gradient(var(--dark-blue-overlay), var(--dark-blue-overlay)),
+                    url('/img/proteccionCivil.jpg') no-repeat center center/cover;
+        color: var(--light-text-color);
+        padding: 6rem 0;
+        text-align: center;
+        display: flex;
+        align-items: flex-start; 
+        justify-content: center;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        padding-top: 15vh; 
+    }
+
+    .hero-content h1 {
+        font-size: 4rem;
+        margin-bottom: 0.2rem;
+        margin-top: 0; 
+        color: var(--light-text-color);
+        font-weight: 450;
+        text-transform: uppercase;
+        line-height: 1.1;
+    }
+
+    .hero-content .hero-tagline {
+        font-size: 2.3rem;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 350;
+        text-transform: uppercase;
+    }
+
+    .section-title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        display: block; 
+        margin-left: auto; 
+        margin-right: auto; 
+        color: var(--primary-color);
+        font-weight: 500;
+        text-transform: uppercase;
+        text-align: center; 
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        width: 80px;
+        height: 4px;
+        background-color: var(--secondary-color);
+        border-radius: 2px;
+    }
+
+    /* ------------------------- SECCIÓN DE "NOSOSTROS" -------------------------*/
+    .about-us-section {
+        position: relative;
+        width: 100%;
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .about-us-section .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: grayscale(10%);
+    }
+
+    .about-content-wrapper {
+        position: absolute;
+        z-index: 2;
+        width: 12000px;
+        display: flex;
+        justify-content: flex-start; 
+        margin-right: 1500px;
+        align-items: center;
+        min-height: inherit;
+    }
+
+    .about-text-box {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        padding: 3rem; 
+        width: 50vw;
+        max-width: 800px;
+        min-height: 800px; 
+        color: var(--dark-text-color);
+        position: absolute; 
+        left: 0; 
+        top: 0;
+        border-top-right-radius:0; 
+        border-bottom-right-radius: 0; 
+        border-top-left-radius: 0; 
+        border-bottom-left-radius: 0; 
+        padding-top: 6rem; 
+    }
+
+    .about-text-box h2.section-title {
+        margin-left: 4.2rem;
+        margin-top: -20px;
+        margin-bottom: 2rem; 
+        
+    }
+    .about-text-box h2.section-title::after {
+        margin-left:-8.2rem;
+        right: 0;
+        transform: translateX(0); 
+    }
+
+    .about-text-box p {
+        font-size: 1.1rem;
+        margin-bottom: -10px;
+        line-height: 1.8;
+        max-width: 80%; 
+        margin-left: auto; 
+        text-align: justify; 
+    }
+
+    /* ------------------------- SECCIÓN DE "FILOSOFÍA" -------------------------*/
+    .philosophy-section {
+        margin-top: 70px;
+        background-color: white; 
+    }
+
+    .philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .philosophy-card {
+        background-color: var(--background-light);
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        padding: 2rem;
+        text-align: center;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: hidden; 
+    }
+
+    .philosophy-card:hover {
+        transform: translateY(-8px) scale(1.02); 
+        box-shadow: 0 10px 55px rgba(0, 0, 0, 0.4); 
+    }
+
+    .philosophy-card .card-image {
+        width: 100%;
+        height: 200px; 
+        object-fit: cover; 
+        border-radius: var(--border-radius) var(--border-radius) 0 0; 
+        margin-bottom: 1.5rem; 
+    }
+
+    .section-title-philosophy{
+        margin-top:-50px;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        position: relative;
+        display: block;
+        margin-left: auto; 
+        margin-right: auto; 
+        color: var(--primary-color);
+        font-weight: 500;
+        text-transform: uppercase;
+        text-align: center; 
+    }
+
+     .section-title-philosophy::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        width: 80px;
+        height: 4px;
+        background-color: var(--secondary-color);
+        border-radius: 2px;
+    }
+
+    .philosophy-card h3 {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .philosophy-card h3::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -5px;
+        width: 50px;
+        height: 3px;
+        background-color: var(--secondary-color);
+        border-radius: 1.5px;
+    }
+
+    .philosophy-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .philosophy-card ul li {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    .philosophy-card ul li::before {
+        content: "\f058"; 
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        top: 0;
+        line-height: inherit;
+    }
+
+    /* Commitment Section */
+    .commitment-section {
+        background-color: var(--primary-color);
+        padding: 1.5rem 0; 
+        text-align: center;
+        margin-bottom: 30px; 
+        margin-top: -20px; 
+        color: var(--light-text-color);
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+    }
+
+    .commitment-title { 
+        font-size: 2.5rem;  
+        color: var(--light-text-color); 
+        margin-bottom: 1.5rem; 
+        font-weight: 450; 
+        text-transform: uppercase; 
+        margin-top: -150px;
+    }
+
+    .commitment-grid {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        flex-wrap: wrap;
+        gap: 0.8rem; 
+        font-size: 1.1rem; 
+        font-weight: 500; 
+    }
+
+    .commitment-item {
+        background-color: transparent; 
+        border-radius: 0; 
+        padding: 0; 
+        font-size: inherit; 
+        font-weight: inherit; 
+        color: var(--light-text-color); 
+        transition: none; 
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .commitment-item span {
+        margin: 0; 
+    }
+
+    .commitment-item:hover {
+        background-color: transparent; 
+        color: var(--light-text-color);
+        transform: none;
+        cursor: default;
+    }
+
+    .separator {
+        color: rgba(255, 255, 255, 0.5); 
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 0 5rem; 
+        line-height: 1; 
+    }
+
+    /* Estilos para la sección de servicios (general) */
+    .services-overview-section {
+        margin-bottom: 80px;
+        margi-top: -60px;
+    }
+
+    /* Estilos para el contenedor del carrusel */
+    .services-carousel {
+        width: 100%;
+        margin-top: 3rem; 
+    }
+
+    /* Estilos para cada slide/tarjeta de servicio */
+    .section-title-services{
+            margin-top: -100px;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: block;
+            margin-left: auto; 
+            margin-right: auto; 
+            color: var(--primary-color);
+            font-weight: 500;
+            text-transform: uppercase;
+            text-align: center; 
+        }
+
+        .section-title-services::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+    /* Estilos para cada slide/tarjeta de servicio */
+    .service-slide {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        height: 250px; 
+        font-size: 1rem;
+        display: flex;
+        align-items: flex-end; 
+        justify-content: center; 
+        text-align: center;
+        cursor: pointer;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    /* NUEVO ESTILO: Para el enlace que envuelve la tarjeta */
+    .service-slide-link {
+        position: absolute; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: inherit; 
+        flex-direction: column;
+        justify-content: flex-end; 
+        align-items: center; 
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .service-slide:hover .service-slide-link {
+        transform: translateY(-5px); 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
+    }
+
+    /* Estilos para la imagen dentro del slide (dentro del enlace ahora) */
+    .service-slide-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+        transition: filter var(--transition-speed), transform var(--transition-speed); 
+    }
+
+    .service-slide:hover .service-slide-img {
+        filter: brightness(0.5); 
+        transform: scale(1.05); 
+    }
+
+    /* Estilos para la capa de superposición con el texto (nombre de la categoría) */
+    .service-slide-overlay {
+        position: relative;
+        z-index: 2; 
+        width: 100%;
+        padding: 1rem 1.5rem 1.5rem 1.5rem; 
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+        color: var(--light-text-color);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 1.1rem; 
+        height: auto; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        text-align: center;
+        transition: background var(--transition-speed);
+    }
+
+    .service-slide-overlay h3 {
+        margin: 0;
+        color: inherit;
+        padding-bottom: 0.2rem;
+        line-height: 1.2;
+    }
+
+    /* Estilos para los botones de navegación de Swiper */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: var(--primary-color) !important; 
+        background-color: rgba(255, 255, 255, 0.7); 
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: background-color var(--transition-speed);
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background-color: var(--secondary-color); 
+        color: white !important;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 1.5rem !important; 
+    }
+
+    /* Estilos para la paginación (los puntos inferiores) */
+    .swiper-pagination-bullet {
+        background-color: rgba(var(--primary-color-rgb), 0.5) !important; 
+        opacity: 1 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: var(--primary-color) !important;
+    }
+
+    /* Clients Section */
+    .clients-section {
+        padding: 5rem 0;
+        background-color: var(--background-blue-section); 
+    }
+
+    .section-title-clients{
+            margin-top:-190px;
+            font-size: 3rem;
+            position: relative;
+            display: block;
+            margin-left: auto; 
+            margin-right: auto; 
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center; 
+    }
+
+     .section-title-clients::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        width: 80px;
+        height: 4px;
+        background-color: var(--secondary-color);
+        border-radius: 2px;
+    }
+
+    .clients-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+        justify-items: center; 
+        align-items: center;
+        margin-top: 3rem;
+    }
+
+    .clients-grid img {
+        max-width: 100%;
+        height: 80px; 
+        object-fit: contain; 
+        filter: grayscale(100%) opacity(70%); 
+        transition: filter var(--transition-speed), transform var(--transition-speed);
+    }
+
+    .clients-grid img:hover {
+        filter: grayscale(0%) opacity(100%); 
+        transform: scale(1.05);
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: 6rem 0; 
+        background-color: #ffffff; 
+        text-align: center;
+        margin-top: -50px;
+    }
+
+    /* Título de la sección de contacto */
+    .section-title {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        margin-top: 20px;
+        position: relative;
+        display: inline-block;
+        color: var(--primary-color);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -15px;
+        width: 100px;
+        height: 5px;
+        background-color: var(--secondary-color);
+        border-radius: 3px;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 4rem;
+        padding: 0 1.5rem;
+        align-items: center;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact-info-area {
+        background-color: #ffffff;
+        padding: 3rem;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        width: 100%;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .contact-info-area:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); 
+    }
+
+    .contact-info-area h3 {
+        font-size: 2.2rem; 
+        color: var(--primary-color);
+        margin-bottom: 1.5rem; 
+        text-align: center; 
+    }
+
+    /* Estilo para el segundo h3 (Horario de Atención) */
+    .contact-info-area h3.mt-4 {
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-info-area p {
+        font-size: 1.1rem; 
+        color: var(--text-color);
+        margin-bottom: 0.8rem; 
+        line-height: 1.5;
+        display: flex; 
+        align-items: center; 
+    }
+
+    .contact-info-area p .fas {
+        color: var(--secondary-color); 
+        margin-right: 1rem;
+        font-size: 1.3rem; 
+        min-width: 25px; 
+    }
+
+    .contact-info-area .contact-phone {
+        font-size: 1.8rem; 
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-top: 1rem;
+        text-align: center; 
+    }
+
+    /* Estilos para la nueva área de imagen de contacto */
+    .contact-image-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; 
+        border-radius: var(--border-radius); 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    }
+
+    .contact-image {
+        width: 100%;
+        height: auto; 
+        display: block; 
+        object-fit: cover; 
+        border-radius: var(--border-radius); 
+    }
+
+    /* --- Media Queries para index.ejs (Responsividad del contenido) --- */
+    @media (max-width: 992px) {
+        .hero-content h1 {
+            font-size: 3.2rem;
+        }
+        .hero-content .hero-tagline {
+            font-size: 1.6rem;
+        }
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .about-text-box {
+            width: 60%;
+            padding: 2.5rem;
+        }
+        .service-card {
+            padding: 2rem;
+        }
+        .service-card .icon-large {
+            font-size: 3rem;
+        }
+        .philosophy-card h3 {
+            font-size: 1.6rem;
+        }
+        .philosophy-card .card-image {
+            height: 180px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 6rem 0;
+            min-height: 60vh;
+        }
+        .hero-content h1 {
+            font-size: 2.5rem;
+        }
+        .hero-content .hero-tagline {
+            font-size: 1.2rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        /* Ajuste para about-us-section en móvil */
+        .about-us-section {
+            min-height: 450px; 
+        }
+        .about-content-wrapper {
+            justify-content: center; 
+            padding: 2rem 15px; 
+        }
+        .about-text-box {
+            width: 90%; 
+            max-width: none; 
+            padding: 2rem;
+            text-align: center; 
+            position: relative; 
+            left: unset; 
+            height: auto; 
+            border-radius: var(--border-radius); 
+            top: unset;
+        }
+        .about-text-box h2.section-title {
+            text-align: center; /* Centra el título en móvil */
+        }
+        .about-text-box h2.section-title::after {
+            left: 50%; /* Centra la línea del título en móvil */
+            transform: translateX(-50%);
+        }
+        .philosophy-grid {
+            flex-direction: column; 
+            align-items: center;
+        }
+        .philosophy-card {
+            width: 100%;
+            max-width: 400px;
+        }
+        .philosophy-card h3::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .philosophy-card ul {
+            text-align: left;
+        }
+        .service-cards-grid {
+            grid-template-columns: 1fr;
+        }
+        .service-card {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .about-us-section, .services-overview-section, .cta-section, .philosophy-section {
+            padding: 3rem 0;
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+        }
+        .cta-section p {
+            font-size: 1rem;
+        }
+        .philosophy-card .card-image {
+            height: 150px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-content h1 {
+            font-size: 2rem;
+        }
+        .hero-content .hero-tagline {
+            font-size: 1rem;
+        }
+        .section-title {
+            font-size: 1.6rem;
+        }
+        .philosophy-card h3 {
+            font-size: 1.4rem;
+        }
+        .philosophy-card ul li {
+            font-size: 0.9rem;
+        }
+        .about-text-box {
+            padding: 1.5rem; 
+        }
+    }
+
+    @media (min-width: 768px) {
+    .special-item {
+        flex-direction: row;
+        max-width: 90%; 
+    }
+}
+
+@media (min-width: 768px) {
+    .special-item-img {
+        width: 45%;
+        height: auto;
+        max-height: 350px; 
+        border-bottom: none; 
+        border-right: 4px solid #0056b3; 
+    }
+}
+</style>
+
+<section id="specialized-services" class="special-showcase-section container" data-aos="fade-up" data-aos-delay="50">
+    <% if (profile.specializedServices) { %>
+        <div class="intro-section">
+            <h2 style="margin-top: -190px;" class="section-title-special text-center"><%= profile.specializedServices.title %></h2>
+            <p style="margin-top: -30px;" class="special-intro text-center"><%= profile.specializedServices.introText %></p>
+        </div>
+    <% } %>
+
+    <% if (profile.specializedServices && profile.specializedServices.items && profile.specializedServices.items.length > 0) { %>
+        <div class="special-items-grid">
+            <h2 style="margin-top: -180px;" class="grid-title">NUESTRAS SOLUCIONES DESTACADAS:</h2>
+            <% profile.specializedServices.items.forEach(function(item, index) { %>
+                <a href="/licitacion/<%= profile.slug %>/<%= item.itemSlug %>" class="special-item" ...>
+                    <img src="<%= item.image %>" alt="<%= item.name %>" class="special-item-img">
+                    <div style="margin-top: 30px;" class="special-item-content">
+                        <h3><%= item.name %></h3>
+                        <p><%= item.description %></p>
+                        <span class="call-to-action">VER ESPECIFICACIONES TÉCNICAS Y CERTIFICACIONES &raquo;</span>
+                    </div>
+                </a>
+            <% }); %>
+        </div>
+    <% } %>
+</section>
+
+<section id="inicio" class="hero-section" data-aos="fade-up">
+    <% if (profile.heroSection) { %>
+        <div class="hero-content container">
+            <h1 data-aos="fade-right" data-aos-delay="200"><%= profile.heroSection.mainTitle %></h1>
+            <p class="hero-tagline" data-aos="fade-left" data-aos-delay="400"><%= profile.heroSection.tagline %></p>
+        </div>
+    <% } %>
+</section>
+
+<section id="nosotros" class="about-us-section" data-aos="fade-up" data-aos-delay="100">
+    <% if (profile.aboutUsSection) { %>
+        <img src="<%= profile.aboutUsSection.image %>" alt="Equipo de Jeguen Solutions" class="background-image">
+        <div class="about-content-wrapper">
+            <div class="about-text-box" data-aos="fade-right" data-aos-delay="200">
+                <h2 class="section-title">Nosotros</h2>
+                <% if (profile.aboutUsSection.textParagraphs && profile.aboutUsSection.textParagraphs.length > 0) { %>
+                    <% profile.aboutUsSection.textParagraphs.forEach(function(paragraph) { %>
+                        <p><%= paragraph %></p>
+                    <% }); %>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</section>
+
+<section id="filosofia" class="philosophy-section container" data-aos="fade-up" data-aos-delay="200">
+    <% if (profile.philosophySection) { %>
+        <h2 class="section-title-philosophy text-center">Filosofía</h2>
+        <div class="philosophy-grid">
+            <% if (profile.philosophySection.mision) { %>
+                <div class="philosophy-card"> 
+                    <img src="<%= profile.philosophySection.mision.image %>" alt="Misión" class="card-image">
+                    <h3>Misión</h3>
+                    <ul>
+                        <li style="text-align: justify"><%= profile.philosophySection.mision.text %></li>
+                    </ul>
+                </div>
+            <% } %>
+            <% if (profile.philosophySection.vision) { %>
+                <div class="philosophy-card"> 
+                    <img src="<%= profile.philosophySection.vision.image %>" alt="Visión" class="card-image">
+                    <h3>Visión</h3>
+                    <ul>
+                        <li style="text-align: justify"><%= profile.philosophySection.vision.text %></li>
+                    </ul>
+                </div>
+            <% } %>
+            <% if (profile.philosophySection.valores && profile.philosophySection.valores.items.length > 0) { %>
+                <div class="philosophy-card"> 
+                    <img src="<%= profile.philosophySection.valores.image %>" alt="Valores" class="card-image">
+                    <h3>Valores</h3>
+                    <ul>
+                        <% profile.philosophySection.valores.items.forEach(function(valor) { %>
+                            <li><%= valor %></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+</section>
+
+<section id="servicios" class="services-overview-section container" data-aos="fade-up" data-aos-delay="100">
+    <% if (profile.servicesOverview && profile.servicesOverview.slides && profile.servicesOverview.slides.length > 0) { %>
+        <h2 class="section-title-services text-center">Nuestros Servicios</h2>
+        <p class="services-intro text-center"><%= profile.servicesOverview.introText %></p>
+
+        <div class="swiper mySwiper services-carousel">
+            <div class="swiper-wrapper">
+                <% profile.servicesOverview.slides.forEach(function(slide) { %>
+                    <a href="<%= slide.detailSlug ? '/servicio/' + profile.slug + '/' + slide.detailSlug : '#' %>" class="swiper-slide service-slide">
+                        <img src="<%= slide.image %>" alt="<%= slide.name %>" class="service-slide-img">
+                        <div class="service-slide-overlay">
+                            <h3><%= slide.name %></h3>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    <% } %>
+</section>
+
+<section class="commitment-section" data-aos="fade-up">
+    <div class="container">
+        <h2 class="commitment-title text-center">COMPROMETIDOS CON LA:</h2>
+        <div class="commitment-grid">
+            <div class="commitment-item" data-aos="zoom-in" data-aos-delay="100">
+                <span>Innovación</span>
+            </div>
+            <div class="separator" data-aos="zoom-in" data-aos-delay="150">|</div> <div class="commitment-item" data-aos="zoom-in" data-aos-delay="200">
+                <span>Tecnología</span>
+            </div>
+            <div class="separator" data-aos="zoom-in" data-aos-delay="250">|</div> <div class="commitment-item" data-aos="zoom-in" data-aos-delay="300">
+                <span>Vanguardia</span>
+            </div>
+            <div class="separator" data-aos="zoom-in" data-aos-delay="350">|</div> <div class="commitment-item" data-aos="zoom-in" data-aos-delay="400">
+                <span>Seguridad</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="clients-section container" data-aos="fade-up" data-aos-delay="100">
+    <% if (profile.clientsSection && profile.clientsSection.clientLogos && profile.clientsSection.clientLogos.length > 0) { %>
+        <h2 class="section-title-clients text-center">CLIENTES</h2>
+        <div class="clients-grid">
+            <% profile.clientsSection.clientLogos.forEach(function(logo) { %>
+                <img src="<%= logo.image %>" alt="<%= logo.altText %>" loading="lazy">
+            <% }); %>
+        </div>
+    <% } %>
+</section>
+
+<section id="contacto" class="contact-section container" data-aos="fade-up" data-aos-delay="100">
+    <% if (profile.contactSection) { %>
+        <h2 class="section-title text-center">CONTÁCTANOS</h2>
+        <div class="contact-grid">
+            <div class="contact-info-area">
+                <h3>Información de Contacto</h3>
+                <% if (profile.contactSection.direction) { %>
+                    <p><i class="fas fa-map-marker-alt"></i> <%= profile.contactSection.direction %></p>
+                <% } %>
+                <% if (profile.contactSection.telefono) { %>
+                    <p><i class="fas fa-phone-alt"></i> Teléfono: <%= profile.contactSection.telefono %></p>
+                <% } %>
+                <% if (profile.contactSection.correo) { %>
+                    <p><i class="fas fa-envelope"></i> Email: <%= profile.contactSection.correo %></p>
+                <% } %>
+                
+                <% if (profile.contactSection.horario1 || profile.contactSection.horario2) { %>
+                    <h3 class="mt-4">Horario de Atención</h3>
+                    <% if (profile.contactSection.horario1) { %>
+                        <p><%= profile.contactSection.horario1 %></p>
+                    <% } %>
+                    <% if (profile.contactSection.horario2) { %>
+                        <p><%= profile.contactSection.horario2 %></p>
+                    <% } %>
+                <% } %>
+            </div>
+
+            <div class="contact-image-area">
+                <% if (profile.contactSection.contactImage) { %>
+                    <img src="<%= profile.contactSection.contactImage %>" alt="Imagen de Contacto Jeguen Solutions" class="contact-image">
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</section>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Busca el contenedor del carrusel con la clase "services-carousel"
+    const servicesCarousel = document.querySelector('.services-carousel');
+
+    // Mueve la inicialización de Swiper dentro de un `if` que comprueba si el carrusel existe.
+    // Esto asegura que solo se inicialice si el EJS lo ha renderizado.
+    if (servicesCarousel) {
+        var swiper = new Swiper(servicesCarousel, {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            grabCursor: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 40,
+                },
+                1200: {
+                    slidesPerView: 5,
+                    spaceBetween: 50,
+                }
+            },
+            on: {
+                slideChangeTransitionEnd: function () {
+                    AOS.refresh();
+                }
+            }
+        });
+    }
+});
+</script>
