@@ -5,8 +5,8 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const session = require('express-session'); 
-const methodOverride = require('method-override'); 
+const session = require('express-session');
+const methodOverride = require('method-override');
 
 dotenv.config();
 
@@ -33,21 +33,21 @@ app.use(methodOverride('_method'));
 
 // --- Configuración de Sesiones ---
 app.use(session({
-    secret: process.env.SESSION_SECRET, 
-    saveUninitialized: true, 
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 
+        maxAge: 1000 * 60 * 60 * 24
     }
 }));
 
 // --- Importar Rutas ---
 const adminRoutes = require("./routes/adminRoutes");
-const mainRoutes = require("./routes/mainRoutes");
-const publicRoutes = require ("./routes/publicRoutes");
+const publicRoutes = require("./routes/publicRoutes");
 
 // --- Usar Rutas ---
 app.use('/admin', adminRoutes);
-app.use('/servicio', mainRoutes); 
+// AHORA SOLO USAMOS publicRoutes para todas las rutas públicas
 app.use('/', publicRoutes);
 
 // --- Manejo de errores 404 (si ninguna ruta coincide) ---
