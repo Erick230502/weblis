@@ -86,6 +86,7 @@
         background-color: #f0f4f7; 
         border-bottom: 2px solid #dae1e7; 
         text-align: center; 
+        margin-top: 360px;
     }
 
     .intro-section {
@@ -202,7 +203,7 @@
     }
 
     /*------------------------- HERO SECTION (BANNER) -------------------------*/
-        .hero-section { 
+    .hero-section { 
         color: var(--light-text-color);
         padding: 6rem 0;
         text-align: center;
@@ -985,30 +986,29 @@
 }
 </style>
 
-<section id="specialized-services" class="special-showcase-section container" data-aos="fade-up" data-aos-delay="50">
-    <% if (profile.specializedServices) { %>
-        <div class="intro-section">
-            <h2 style="margin-top: -190px;" class="section-title-special text-center"><%= profile.specializedServices.title %></h2>
-            <p style="margin-top: -30px;" class="special-intro text-center"><%= profile.specializedServices.introText %></p>
-        </div>
-    <% } %>
+<% if (profile.specializedServices && profile.specializedServices.items && profile.specializedServices.items.length > 0) { %>
+    <section id="specialized-services" class="special-showcase-section container" data-aos="fade-up" data-aos-delay="50">
+        <!-- Título y subtítulo que se van -->
+        <div class="intro-section">
+            <h2 style="margin-top: -190px;" class="section-title-special text-center"><%= profile.specializedServices.title %></h2>
+            <p style="margin-top: -30px;" class="special-intro text-center"><%= profile.specializedServices.introText %></p>
+        </div>
 
-    <% if (profile.specializedServices && profile.specializedServices.items && profile.specializedServices.items.length > 0) { %>
-        <div class="special-items-grid">
-            <h2  class="grid-title">NUESTRAS SOLUCIONES DESTACADAS:</h2>
-            <% profile.specializedServices.items.forEach(function(item, index) { %>
-                <a href="/licitacion/<%= profile.slug %>/<%= item.itemSlug %>" class="special-item" ...>
-                    <img src="<%= item.image %>" alt="<%= item.name %>" class="special-item-img">
-                    <div style="margin-top: 30px;" class="special-item-content">
-                        <h3><%= item.name %></h3>
-                        <p><%= item.description %></p>
-                        <span class="call-to-action">VER ESPECIFICACIONES TÉCNICAS Y CERTIFICACIONES &raquo;</span>
-                    </div>
-                </a>
-            <% }); %>
-        </div>
-    <% } %>
-</section>
+        <div class="special-items-grid">
+            <h2 class="grid-title">NUESTRAS SOLUCIONES DESTACADAS:</h2>
+            <% profile.specializedServices.items.forEach(function(item) { %>
+                <a href="/servicio/<%= profile.slug %>/<%= item.detailSlug %>" class="special-item" ...>
+                    <img src="<%= item.image %>" alt="<%= item.name %>" class="special-item-img">
+                    <div style="margin-top: 30px;" class="special-item-content">
+                        <h3><%= item.name %></h3>
+                        <p><%= item.description %></p>
+                        <span class="call-to-action">VER ESPECIFICACIONES TÉCNICAS Y CERTIFICACIONES &raquo;</span>
+                    </div>
+                </a>
+            <% }); %>
+        </div>
+    </section>
+<% } %>
 
 <section 
     id="inicio" 
