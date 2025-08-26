@@ -89,7 +89,7 @@
     }
 
     .intro-section {
-        margin-bottom: 60px;
+        margin-bottom: 20px;
         margin-top: 160px;
     }
 
@@ -106,7 +106,7 @@
         font-size: 1.25em; 
         color: #333;
         max-width: 950px; 
-        margin: 0 auto 30px auto;
+        margin: 0 auto -35px auto;
         line-height: 1.7; 
         font-weight: 400;
         text-align: justify;
@@ -157,7 +157,7 @@
     }
 
     .special-item-content {
-        padding: 30px; 
+        padding: 10px; 
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -168,7 +168,8 @@
     .special-item-content h3 {
         font-size: 2em; 
         color: #003366; 
-        margin-bottom: 10px;
+        margin-bottom: -10px;
+        margin-top: -40px;
         font-weight: 700;
         line-height: 1.2;
     }
@@ -201,9 +202,7 @@
     }
 
     /*------------------------- HERO SECTION (BANNER) -------------------------*/
-    .hero-section {
-        background: linear-gradient(var(--dark-blue-overlay), var(--dark-blue-overlay)),
-                    url('/img/proteccionCivil.jpg') no-repeat center center/cover;
+        .hero-section { 
         color: var(--light-text-color);
         padding: 6rem 0;
         text-align: center;
@@ -224,8 +223,8 @@
 
     .hero-content h1 {
         font-size: 4rem;
-        margin-bottom: 0.2rem;
-        margin-top: 0; 
+        margin-bottom: 0.1rem;
+        margin-top: -100px; 
         color: var(--light-text-color);
         font-weight: 450;
         text-transform: uppercase;
@@ -672,57 +671,58 @@
     }
 
     /* Clients Section */
-    .clients-section {
-        padding: 5rem 0;
-        background-color: var(--background-blue-section); 
-    }
+.clients-section {
+    padding: 1rem 0;
+    background-color: var(--background-blue-section); 
+}
 
-    .section-title-clients{
-            margin-top:-190px;
-            font-size: 3rem;
-            position: relative;
-            display: block;
-            margin-left: auto; 
-            margin-right: auto; 
-            color: var(--primary-color);
-            font-weight: 700;
-            text-transform: uppercase;
-            text-align: center; 
-    }
+.section-title-clients{
+    margin-top:-20px;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: block;
+    margin-left: auto; 
+    margin-right: auto; 
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center; 
+}
 
-     .section-title-clients::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -10px;
-        width: 80px;
-        height: 4px;
-        background-color: var(--secondary-color);
-        border-radius: 2px;
-    }
+.section-title-clients::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
 
-    .clients-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 2rem;
-        justify-items: center; 
-        align-items: center;
-        margin-top: 3rem;
-    }
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 4rem;
+    justify-items: center; 
+    align-items: center;
+    margin-top: 3rem;
+}
 
-    .clients-grid img {
-        max-width: 100%;
-        height: 80px; 
-        object-fit: contain; 
-        filter: grayscale(100%) opacity(70%); 
-        transition: filter var(--transition-speed), transform var(--transition-speed);
-    }
+.clients-grid img {
+    max-width: 100%;
+    height: 180px; 
+    object-fit: contain; 
+    filter: grayscale(100%) opacity(70%); 
+    transition: filter var(--transition-speed), transform var(--transition-speed);
+}
 
-    .clients-grid img:hover {
-        filter: grayscale(0%) opacity(100%); 
-        transform: scale(1.05);
-    }
+.clients-grid img:hover {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.05);
+}
 
     /* Contact Section */
     .contact-section {
@@ -995,7 +995,7 @@
 
     <% if (profile.specializedServices && profile.specializedServices.items && profile.specializedServices.items.length > 0) { %>
         <div class="special-items-grid">
-            <h2 style="margin-top: -180px;" class="grid-title">NUESTRAS SOLUCIONES DESTACADAS:</h2>
+            <h2  class="grid-title">NUESTRAS SOLUCIONES DESTACADAS:</h2>
             <% profile.specializedServices.items.forEach(function(item, index) { %>
                 <a href="/licitacion/<%= profile.slug %>/<%= item.itemSlug %>" class="special-item" ...>
                     <img src="<%= item.image %>" alt="<%= item.name %>" class="special-item-img">
@@ -1010,14 +1010,22 @@
     <% } %>
 </section>
 
-<section id="inicio" class="hero-section" data-aos="fade-up">
-    <% if (profile.heroSection) { %>
-        <div class="hero-content container">
-            <h1 data-aos="fade-right" data-aos-delay="200"><%= profile.heroSection.mainTitle %></h1>
-            <p class="hero-tagline" data-aos="fade-left" data-aos-delay="400"><%= profile.heroSection.tagline %></p>
-        </div>
-    <% } %>
+<section 
+    id="inicio" 
+    class="hero-section" 
+    data-aos="fade-up"
+    <% if (profile.heroSection && profile.heroSection.image) { %>
+        style="background: linear-gradient(var(--dark-blue-overlay), var(--dark-blue-overlay)), url('<%= profile.heroSection.image %>') no-repeat center center/cover;"
+    <% } %>
+>
+    <% if (profile.heroSection) { %>
+        <div class="hero-content container">
+            <h1 data-aos="fade-right" data-aos-delay="200"><%= profile.heroSection.mainTitle %></h1>
+            <p class="hero-tagline" data-aos="fade-left" data-aos-delay="400"><%= profile.heroSection.tagline %></p>
+        </div>
+    <% } %>
 </section>
+
 
 <section id="nosotros" class="about-us-section" data-aos="fade-up" data-aos-delay="100">
     <% if (profile.aboutUsSection) { %>
@@ -1041,7 +1049,7 @@
         <div class="philosophy-grid">
             <% if (profile.philosophySection.mision) { %>
                 <div class="philosophy-card"> 
-                    <img src="<%= profile.philosophySection.mision.image %>" alt="Misión" class="card-image">
+                    <img src="/img/mision.jpg" alt="Misión" class="card-image">
                     <h3>Misión</h3>
                     <ul>
                         <li style="text-align: justify"><%= profile.philosophySection.mision.text %></li>
@@ -1050,7 +1058,7 @@
             <% } %>
             <% if (profile.philosophySection.vision) { %>
                 <div class="philosophy-card"> 
-                    <img src="<%= profile.philosophySection.vision.image %>" alt="Visión" class="card-image">
+                    <img src="/img/vision.jpg" alt="Visión" class="card-image">
                     <h3>Visión</h3>
                     <ul>
                         <li style="text-align: justify"><%= profile.philosophySection.vision.text %></li>
@@ -1059,7 +1067,7 @@
             <% } %>
             <% if (profile.philosophySection.valores && profile.philosophySection.valores.items.length > 0) { %>
                 <div class="philosophy-card"> 
-                    <img src="<%= profile.philosophySection.valores.image %>" alt="Valores" class="card-image">
+                    <img src="/img/valores.jpg" alt="Valores" class="card-image">
                     <h3>Valores</h3>
                     <ul>
                         <% profile.philosophySection.valores.items.forEach(function(valor) { %>
