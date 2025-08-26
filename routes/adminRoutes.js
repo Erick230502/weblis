@@ -133,12 +133,93 @@ router.get('/profiles/new', isAuthenticated, (req, res) => {
     const message = req.session.message;
     delete req.session.message;
 
+
+    const defaultProfile = {
+        isActive:true,
+        heroSection: {
+            mainTitle: 'JEGUEN SOLUTIONS',
+            tagline: 'NOS ALINEAMOS A TU SOLUCIÓN',
+            image: 'https://imgs.search.brave.com/dKQn155llrC98TZhEuuHbBe33ZEF2W7AnJhSQTdvD2g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdDUu/ZGVwb3NpdHBob3Rv/cy5jb20vNjU4MzIx/OC82ODgwMi9pLzQ1/MC9kZXBvc2l0cGhv/dG9zXzY4ODAyNDIx/MC1zdG9jay1waG90/by10ZWFtd29yay1z/b2xpZGFyaXR5LXN1/Y2Nlc3MtY2xvc2Ut/aGFuZHMuanBn'
+        },
+        aboutUsSection: {
+            image: 'https://imgs.search.brave.com/xRnPUpf8v51vJQ1h56Z8WXZ6Ts53mMwRINMEy07hgME/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ocmxv/Zy5lcy93cC1jb250/ZW50L3VwbG9hZHMv/MjAyMi8xMC81LWMt/ZGVsLXRyYWJham8t/ZW4tZXF1aXBvLmpw/Zw',
+            textParagraphs: [
+                'En JEGUEN SOLUTIONS nos mueve una idea sencilla pero poderosa: acercarte productos de calidad que realmente marquen la diferencia. Somos un equipo apasionado por la innovación, la seguridad y la confianza, y trabajamos cada día para que encuentres en un solo lugar el equipamiento que necesitas para alcanzar tus objetivos.',
+                'Sabemos que cada área disciplinaria tiene sus propios retos, por eso seleccionamos cuidadosamente nuestro catálogo, garantizando que cada artículo/servicio cumpla con altos estándares de resistencia, funcionalidad y durabilidad.',
+                'Más que vender productos, buscamos construir relaciones sólidas basadas en honestidad, transparencia y compromiso. Nuestro propósito es que cada compra sea una experiencia segura, confiable y satisfactoria, porque entendemos que tu éxito también es el nuestro.'
+            ]
+        },
+        philosophySection: {
+            mision: {
+            text: 'Ofrecer a nuestros clientes productos/servicios de alta calidad en distintas áreas disciplinarias, garantizando confianza, seguridad y excelencia en cada compra. Nos comprometemos a proporcionar soluciones accesibles y duraderas que contribuyan al crecimiento personal, profesional y empresarial de quienes confían en nosotros.'
+            },
+            vision: {
+            text: 'Ser una empresa reconocida a nivel nacional e internacional como referente en la venta de equipamiento confiable y versátil, distinguiéndonos por la innovación, el servicio al cliente y la capacidad de adaptarnos a las necesidades de un mercado en constante evolución.'
+            },
+            valores: {
+            items: [
+                'Calidad: Seleccionamos productos que cumplen con altos estándares para asegurar tu satisfacción.',
+                'Confianza: Trabajamos con transparencia y responsabilidad en cada interacción.',
+                'Compromiso: Nos enfocamos en ofrecer soluciones que realmente generen valor.',
+                'Innovación: Buscamos constantemente nuevas formas de mejorar nuestra oferta y servicio.',
+                'Servicio: Ponemos al cliente en el centro, acompañándolo en todo el proceso de compra.'
+            ]
+            }
+        },
+        servicesOverview: {
+            introText: 'Descubre un espacio donde la calidad se une con la confianza y la innovación para ofrecerte soluciones diseñadas para cada necesidad con el respaldo de un equipo comprometido en brindarte seguridad, variedad y el mejor servicio para que encuentres en un solo lugar el equipamiento que impulsa tu crecimiento.',
+        },
+        contactSection: {
+            direction: 'Ozumba, Estado de México, CP. 56800, México',
+            telefono: '55 54625545',
+            correo: 'administrativo@jeguen.com',
+            horario1: 'Lunes a Viernes: 9:00 AM - 6:00 PM',
+            horario2: 'Sábado: 9:00 AM - 1:00 PM',
+        },
+        itemDetails: [ 
+            {
+                hero: {
+                    title: 'JEGUEN SOLUTIONS',
+                    subtitle: 'NOS ALINEAMOS A TU SOLUCIÓN',
+                    backgroundImage: 'ruta/a/imagen-hero.jpg'
+                },
+                intro: {
+                    paragraph1: 'Ofrecemos prendas de protección personal diseñadas para acompañar al personal operativo en cada escenario crítico: lluvia, baja visibilidad, contacto exterior o intervención de emergencia.',
+                    paragraph2: 'Nuestras soluciones combinan resistencia, funcionalidad y diseño inteligente, ideales para brigadas de protección civil y cualquier equipo que necesite actuar con seguridad, confianza y libertad de movimiento.',
+                    paragraph3: 'Cada prenda está pensada para responder cuando más se necesita, cumpliendo con exigencias técnicas reales y cuidando cada detalle: materiales duraderos, estampados reflectantes, sellado profesional y confección de alta calidad.'
+                },
+                // Aquí se define el array con los bloques de contenido
+                contentSections: [
+                    {
+                        title: 'PROTECCIÓN PERSONAL CON PROPÓSITO',
+                        text: 'Años de experiencia nos han enseñado que la protección no admite improvisaciones . Por eso diseñamos, producimos y suministramos indumentaria operativa que cumple, protege y representa a las instituciones más exigentes. Sabemos lo que implica estar en campo bajo lluvia intensa, visibilidad limitada o situaciones de emergencia. Por eso creamos soluciones textiles técnicas, con materiales certificados, diseño funcional y acabados de calidad profesional.',
+                        imageCaption: 'Equipo profesional de alta calidad.',
+                        isReversed: false
+                    },
+                    {
+                        title: 'COMPROMETIDOS CON TU MISIÓN',
+                        text: 'Este bloque puede explicar el proceso o la metodología de nuestro servicio oCuando el personal operativo necesita estar protegido, visible y listo para actuar, nuestras prendas ya están listas para cumplir. Cada costura termosellada, cada centímetro de tela de alta visibilidad, cada broche y cada logo están ahí por una razón: funcionar cuando lo demás falla . Porque en campo abierto no hay margen para errores, y la protección personal no es un accesorio: es parte del equipo. producto.',
+                        imageCaption: 'Compromiso para tu prestigio.',
+                        isReversed: true
+                    }
+                ],
+                contactInfo: {
+                    title: '¿Listo para un equipo de alta calidad? Contáctanos',
+                    companyName: 'JEGUEN SOLUTIONS',
+                    companyDetail: 'JEGUEN S DE RL DE CV',
+                    phone: '5554625545',
+                    email: 'administrativo@jeguen.com'
+                },
+            }
+        ]
+    };
+
     res.render('admin/new', {
         title: 'Crear Nuevo Perfil',
-        profile: null, // Se mantiene 'null' para indicar que es un formulario de creación vacío
+        profile: defaultProfile, 
         error: message && message.type === 'error' ? message.text : '',
         success: message && message.type === 'success' ? message.text : '',
-        blockData: {} // <-- ¡Aquí está la corrección! Se añade un objeto vacío por defecto
+        blockData: {}
     });
 });
 
@@ -188,8 +269,8 @@ router.post('/profiles/new', isAuthenticated, async (req, res) => {
             // About Us Section
             aboutUsSection: {
                 image: formData.aboutUsSection?.image || '',
-                textParagraphs: Array.isArray(formData.aboutUsSection?.textParagraphs)
-                    ? formData.aboutUsSection.textParagraphs.filter(p => p !== null && p !== undefined)
+                textParagraphs: formData.aboutUsSection?.text
+                    ? formData.aboutUsSection.text.split('\r\n\r\n').filter(p => p.trim() !== '')
                     : []
             },
 
