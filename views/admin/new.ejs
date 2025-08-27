@@ -89,7 +89,7 @@
             <h3>PÁRRAFOS DE LA SECCIÓN "NOSOTROS"</h3>
                 <div class="form-group">
                     <label for="aboutUsSection_text">Párrafos de la Sección "Nosotros":</label>
-                    <textarea id="aboutUsSection_text" name="aboutUsSection[text]" rows="10" required minlength = 300 maxlength = 700><%= profile && profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.join('\n\n') : '' %></textarea>
+                    <textarea id="aboutUsSection_text" name="aboutUsSection[text]" rows="10" minlength = 300 maxlength = 700 required><%= profile && profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.join('\n\n') : '' %></textarea>
                     <small>Escribe cada párrafo y presiona ENTER dos veces para una nueva línea. Los párrafos se separarán automáticamente en la vista.</small>
                 </div>
         </section>

@@ -1045,42 +1045,42 @@
     <% } %>
 </section>
 
-<section id="filosofia" class="philosophy-section container" data-aos="fade-up" data-aos-delay="200">
-    <% if (profile.philosophySection) { %>
-        <h2 class="section-title-philosophy text-center">Filosofía</h2>
-        <div class="philosophy-grid">
-            <% if (profile.philosophySection.mision) { %>
-                <div class="philosophy-card"> 
-                    <img src="/img/mision.jpg" alt="Misión" class="card-image">
-                    <h3>Misión</h3>
-                    <ul>
-                        <li style="text-align: justify"><%= profile.philosophySection.mision.text %></li>
-                    </ul>
-                </div>
-            <% } %>
-            <% if (profile.philosophySection.vision) { %>
-                <div class="philosophy-card"> 
-                    <img src="/img/vision.jpg" alt="Visión" class="card-image">
-                    <h3>Visión</h3>
-                    <ul>
-                        <li style="text-align: justify"><%= profile.philosophySection.vision.text %></li>
-                    </ul>
-                </div>
-            <% } %>
-            <% if (profile.philosophySection.valores && profile.philosophySection.valores.items.length > 0) { %>
-                <div class="philosophy-card"> 
-                    <img src="/img/valores.jpg" alt="Valores" class="card-image">
-                    <h3>Valores</h3>
-                    <ul>
-                        <% profile.philosophySection.valores.items.forEach(function(valor) { %>
-                            <li><%= valor %></li>
-                        <% }); %>
-                    </ul>
-                </div>
-            <% } %>
-        </div>
-    <% } %>
-</section>
+    <section id="filosofia" class="philosophy-section container" data-aos="fade-up" data-aos-delay="200">
+        <% if (profile.philosophySection) { %>
+            <h2 class="section-title-philosophy text-center">Filosofía</h2>
+            <div class="philosophy-grid">
+                <% if (profile.philosophySection.mision) { %>
+                    <div class="philosophy-card"> 
+                        <img src="/img/mision.jpg" alt="Misión" class="card-image">
+                        <h3>Misión</h3>
+                        <ul>
+                            <li style="text-align: justify"><%= profile.philosophySection.mision.text %></li>
+                        </ul>
+                    </div>
+                <% } %>
+                <% if (profile.philosophySection.vision) { %>
+                    <div class="philosophy-card"> 
+                        <img src="/img/vision.jpg" alt="Visión" class="card-image">
+                        <h3>Visión</h3>
+                        <ul>
+                            <li style="text-align: justify"><%= profile.philosophySection.vision.text %></li>
+                        </ul>
+                    </div>
+                <% } %>
+                <% if (profile.philosophySection.valores && profile.philosophySection.valores.items.length > 0) { %>
+                    <div class="philosophy-card"> 
+                        <img src="/img/valores.jpg" alt="Valores" class="card-image">
+                        <h3>Valores</h3>
+                        <ul>
+                            <% profile.philosophySection.valores.items.forEach(function(valor) { %>
+                                <li><%= valor %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </section>
 
 <section id="servicios" class="services-overview-section container" data-aos="fade-up" data-aos-delay="100">
     <% if (profile.servicesOverview && profile.servicesOverview.slides && profile.servicesOverview.slides.length > 0) { %>

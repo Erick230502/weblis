@@ -471,12 +471,16 @@ router.put('/profiles/edit/:id', isAuthenticated, async (req, res) => {
             },
             aboutUsSection: {
                 image: formData.aboutUsSection?.image || '',
-                textParagraphs: Array.isArray(formData.aboutUsSection?.textParagraphs) ? formData.aboutUsSection.textParagraphs.filter(p => p !== null && p !== undefined) : []
+                // Unificar el campo de texto en un array de párrafos
+                textParagraphs: formData.aboutUsSection?.textParagraphs ? formData.aboutUsSection.textParagraphs.split('\r\n').filter(p => p.trim() !== '') : []
             },
             philosophySection: {
                 mision: { text: formData.philosophySection?.mision?.text || '' },
                 vision: { text: formData.philosophySection?.vision?.text || '' },
-                valores: { items: Array.isArray(formData.philosophySection?.valores?.items) ? formData.philosophySection.valores.items.filter(v => v !== null && v !== undefined) : [] }
+                valores: {
+                    // Unificar el campo de texto en un array de ítems
+                    items: formData.philosophySection?.valores?.items ? formData.philosophySection.valores.items.split('\r\n').filter(v => v.trim() !== '') : []
+                }
             },
             servicesOverview: {
                 introText: formData.servicesOverview?.introText || '',
