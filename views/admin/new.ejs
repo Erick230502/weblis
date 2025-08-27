@@ -471,7 +471,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let specializedItemIndex = <%= profile && profile.specializedServices && profile.specializedServices.items ? profile.specializedServices.items.length : 0 %>;
-        let aboutUsParagraphIndex = <%= profile && profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.length : 0 %>;
         let valorIndex = <%= profile && profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.length : 0 %>;
         let serviceSlideIndex = <%= profile && profile.servicesOverview && profile.servicesOverview.slides ? profile.servicesOverview.slides.length : 0 %>;
         let clientLogoIndex = <%= profile && profile.clientsSection && profile.clientsSection.clientLogos ? profile.clientsSection.clientLogos.length : 0 %>;
@@ -506,7 +505,6 @@
                     const message = document.createElement('p');
                     message.classList.add('empty-list-message');
                     if (containerId === 'specialized-items-container') message.textContent = 'Aún no hay ítems de equipamiento/servicio. Añade uno:';
-                    else if (containerId === 'about-us-paragraphs-container') message.textContent = 'Aún no hay párrafos de "Nosotros". Añade uno:';
                     else if (containerId === 'valores-items-container') message.textContent = 'Aún no hay valores definidos. Añade uno:';
                     else if (containerId === 'service-slides-container') message.textContent = 'Aún no hay slides de servicio. Añade uno:';
                     else if (containerId === 'client-logos-container') message.textContent = 'Aún no hay logos de clientes. Añade uno:';
@@ -559,30 +557,6 @@ function addSpecializedItemBlock(itemData = {}, index = specializedItemIndex) {
 document.getElementById('add-specialized-item-btn').addEventListener('click', () => addSpecializedItemBlock());
 document.querySelectorAll('#specialized-items-container .dynamic-item-block .remove-item-button')
     .forEach(btn => addRemoveListener(btn, btn.closest('.dynamic-item-block')));
-
-
-        // 2. About Us Paragraph Block
-        function addAboutUsParagraphBlock(paragraphData = '', index = aboutUsParagraphIndex) {
-            const container = document.getElementById('about-us-paragraphs-container');
-            const block = document.createElement('div');
-            block.classList.add('dynamic-item-block');
-            block.innerHTML = `
-                <h4 style= "color: #1D218C">PÁRRAFO "NOSOTROS" #${index + 1}</h4>
-                <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                <div class="form-group">
-                    <label for="aboutUsSection_textParagraphs_${index}">Párrafo:</label>
-                    <textarea id="aboutUsSection_textParagraphs_${index}" name="aboutUsSection[textParagraphs][${index}]" rows="4" required>${paragraphData || ''}</textarea>
-                    <small>Texto del párrafo de la sección de "Nosotros"</small>
-                </div>
-            `;
-            container.appendChild(block);
-            addRemoveListener(block.querySelector('.remove-item-button'), block);
-            aboutUsParagraphIndex++;
-            checkEmptyListMessages();
-        }
-        document.getElementById('add-about-us-paragraph-btn').addEventListener('click', () => addAboutUsParagraphBlock());
-        document.querySelectorAll('#about-us-paragraphs-container .dynamic-item-block .remove-item-button')
-            .forEach(btn => addRemoveListener(btn, btn.closest('.dynamic-item-block')));
 
 
         // 3. Valor Block
