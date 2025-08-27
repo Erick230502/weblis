@@ -209,13 +209,16 @@
     </section>
 
     <div class="container">
-        <% if (itemDetail.intro && (itemDetail.intro.paragraph1 || itemDetail.intro.paragraph2 || itemDetail.intro.paragraph3)) { %>
+        <% if (itemDetail.intro && itemDetail.intro.text) { %>
             <section class="intro-section">
-                <% if (itemDetail.intro.paragraph1) { %><p><%= itemDetail.intro.paragraph1 %></p><% } %>
-                <% if (itemDetail.intro.paragraph2) { %><p><%= itemDetail.intro.paragraph2 %></p><% } %>
-                <% if (itemDetail.intro.paragraph3) { %><p><%= itemDetail.intro.paragraph3 %></p><% } %>
+                <% 
+                    const paragraphs = itemDetail.intro.text.split('\r\n').filter(p => p.trim() !== ''); 
+                    paragraphs.forEach(function(p) { 
+                %>
+                    <p><%= p %></p>
+                <% }); %>
             </section>
-        <% } %>
+         <% } %>
 
         <% if (itemDetail.contentSections && itemDetail.contentSections.length > 0) { %>
             <section class="content-blocks-section">

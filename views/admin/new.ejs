@@ -183,19 +183,19 @@
             </div>
         </section>
 
-<section class="section-card">
-    <h2><i class="fas fa-file-alt"></i> SECCIÓN "PÁGINA DE DETALLE"</h2>
-    <p>Esta sección creará una página de detalle general para todos los servicios. Solo necesitas añadir un bloque de detalle.</p>
-    <div id="item-details-container">
-        <% if (profile && profile.itemDetails && profile.itemDetails.length > 0) { %>
-            <% profile.itemDetails.forEach(function(itemDetail, index) { %>
-                <%- include('partials/detailItemBlock', { itemDetail: itemDetail, mainIndex: index }); %>
-            <% }); %>
-        <% } else { %>
-            <p class="empty-list-message">Aún no hay páginas de detalle. Añade una:</p>
-        <% } %>
-    </div>
-</section>
+        <section class="section-card">
+            <h2><i class="fas fa-file-alt"></i> SECCIÓN "PÁGINA DE DETALLE"</h2>
+            <p style="margin-bottom: 20px;"><strong>¡IMPORTANTE!</strong> Esta sección está diseñada para la creación de la página de detalles generales de los servicios especializados y servicios del carrusel.</p>
+            <div id="item-details-container">
+                <% if (profile && profile.itemDetails && profile.itemDetails.length > 0) { %>
+                    <% profile.itemDetails.forEach(function(itemDetail, index) { %>
+                        <%- include('partials/detailItemBlock', { itemDetail: itemDetail, mainIndex: index }); %>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-list-message">Aún no hay páginas de detalle. Añade una:</p>
+                <% } %>
+            </div>
+        </section>
 
         <div class="form-actions">
             <button type="submit" class="submit-button"><i class="fas fa-save"></i> Crear Perfil</button>

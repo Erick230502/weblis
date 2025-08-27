@@ -1,9 +1,6 @@
 <div class="dynamic-item-block detail-item-section card mb-3">
     <div class="card-body">
-        <h3>Página de Detalle de Ítem #<%= mainIndex + 1 %></h3>
-        <button type="button" class="remove-item-button btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Eliminar Página de Detalle</button>
-
-        <h4><i class="fas fa-heading"></i> Sección Hero del Detalle</h4>
+        <h4 style="font-size:30px; text-align:center"><i class="fa fa-image" style="color: #007bff"></i> SECCIÓN DEL BANNER</h4>
         <div class="form-group">
             <label for="itemDetails_<%= mainIndex %>_hero_title">Título Hero:</label>
             <input type="text" id="itemDetails_<%= mainIndex %>_hero_title" name="itemDetails[<%= mainIndex %>][hero][title]" value="<%= itemDetail.hero ? itemDetail.hero.title : '' %>" class="form-control" required>
@@ -17,21 +14,14 @@
             <input type="text" id="itemDetails_<%= mainIndex %>_hero_backgroundImage" name="itemDetails[<%= mainIndex %>][hero][backgroundImage]" value="<%= itemDetail.hero ? itemDetail.hero.backgroundImage : '' %>" class="form-control">
         </div>
 
-        <h4><i class="fas fa-pencil-alt"></i> Introducción del Detalle</h4>
-        <div class="form-group">
-            <label for="itemDetails_<%= mainIndex %>_intro_paragraph1">Párrafo Introductorio 1:</label>
-            <textarea id="itemDetails_<%= mainIndex %>_intro_paragraph1" name="itemDetails[<%= mainIndex %>][intro][paragraph1]" rows="3" class="form-control"><%= itemDetail.intro ? itemDetail.intro.paragraph1 : '' %></textarea>
-        </div>
-        <div class="form-group">
-            <label for="itemDetails_<%= mainIndex %>_intro_paragraph2">Párrafo Introductorio 2:</label>
-            <textarea id="itemDetails_<%= mainIndex %>_intro_paragraph2" name="itemDetails[<%= mainIndex %>][intro][paragraph2]" rows="3" class="form-control"><%= itemDetail.intro ? itemDetail.intro.paragraph2 : '' %></textarea>
-        </div>
-        <div class="form-group">
-            <label for="itemDetails_<%= mainIndex %>_intro_paragraph3">Párrafo Introductorio 3:</label>
-            <textarea id="itemDetails_<%= mainIndex %>_intro_paragraph3" name="itemDetails[<%= mainIndex %>][intro][paragraph3]" rows="3" class="form-control"><%= itemDetail.intro ? itemDetail.intro.paragraph3 : '' %></textarea>
-        </div>
+        <h4 style="font-size:30px; text-align:center"><i class="fas fa-pencil-alt" style="color:#007bff"></i> INTRODUCCIÓN DEL DETALLE</h4>
+            <div class="form-group">
+                <label for="itemDetails_<%= mainIndex %>_intro_text">Texto Introductorio:</label>
+                <textarea id="itemDetails_<%= mainIndex %>_intro_text" name="itemDetails[<%= mainIndex %>][intro][text]" rows="6" class="form-control"><%= itemDetail.intro ? itemDetail.intro.text : '' %></textarea>
+                <small>Escribe aquí el texto de introducción. Puedes usar saltos de línea para separar párrafos.</small>
+            </div>
 
-        <h4><i class="fas fa-file-text"></i> Bloques de Contenido del Detalle</h4>
+        <h4 style="font-size:30px; text-align:center"><i class="fas fa-file-text" style= "color:#007bff"></i> BLOQUES DE CONTENIDO DE DETALLE</h4>
         <div id="item-details-content-sections-container-<%= mainIndex %>">
             <% if (itemDetail.contentSections && itemDetail.contentSections.length > 0) { %>
                 <% itemDetail.contentSections.forEach(function(block, contentIndex) { %>
@@ -42,7 +32,7 @@
             <% } %>
         </div>
 
-        <h4><i class="fas fa-phone"></i> Información de Contacto del Detalle</h4>
+        <h4 style="font-size:30px; text-align:center"><i class="fas fa-phone" style="color:#007bff"></i> INFORMACIÓN DE CONTACTO</h4>
         <div class="form-group">
             <label for="itemDetails_<%= mainIndex %>_contactInfo_title">Título de Contacto:</label>
             <input type="text" id="itemDetails_<%= mainIndex %>_contactInfo_title" name="itemDetails[<%= mainIndex %>][contactInfo][title]" value="<%= itemDetail.contactInfo ? itemDetail.contactInfo.title : '' %>" class="form-control">
@@ -65,3 +55,4 @@
         </div>
     </div>
 </div>
+
