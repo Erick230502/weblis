@@ -194,10 +194,10 @@
     <div id="item-details-container">
         <% if (profile && profile.itemDetails && profile.itemDetails.length > 0) { %>
             <% profile.itemDetails.forEach(function(itemDetail, index) { %>
-                <%- include('partials/itemDetailBlock', { itemDetail: itemDetail, index: index, parentFieldName: 'itemDetails' }); %>
+                <%- include('partials/detailItemBlock', { itemDetail: itemDetail, mainIndex: index }); %>
             <% }); %>
         <% } else { %>
-             <p class="empty-list-message">Aún no hay páginas de detalle. Añade una:</p>
+            <p class="empty-list-message">Aún no hay páginas de detalle. Añade una:</p>
         <% } %>
     </div>
     <button type="button" id="add-item-detail-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Página de Detalle</button>

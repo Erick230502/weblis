@@ -44,7 +44,7 @@ router.get('/servicio/:slug', async (req, res) => {
     }
 });
 
-// Ruta para las páginas de detalle de ítems 
+// Ruta para las páginas de detalle de ítems (ej. /servicio/proteccion-civil/impermeables)
 router.get('/servicio/:profileSlug/:itemSlug', async (req, res) => {
     try {
         const { profileSlug, itemSlug } = req.params;
@@ -58,6 +58,7 @@ router.get('/servicio/:profileSlug/:itemSlug', async (req, res) => {
             });
         }
 
+        // Busca el ítem de detalle dentro de la colección itemDetails del perfil
         const itemDetail = profile.itemDetails.find(item => item.itemSlug === itemSlug);
         
         if (!itemDetail) {
@@ -67,6 +68,7 @@ router.get('/servicio/:profileSlug/:itemSlug', async (req, res) => {
             });
         }
 
+        // Pasa el objeto 'itemDetail' a la plantilla.
         res.render('servicio/detail', { 
             itemDetail: itemDetail, 
             title: itemDetail.hero.title + ' | JEGUEN SOLUTIONS' 
