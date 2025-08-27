@@ -107,16 +107,11 @@
                 <small>Visión de la marca </small>
             </div>
             <h3>Valores</h3>
-            <div id="valores-items-container">
-                <% if (profile && profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items && profile.philosophySection.valores.items.length > 0) { %>
-                    <% profile.philosophySection.valores.items.forEach(function(item, index) { %>
-                        <%- include('partials/valueBlock', { value: item, index: index, fieldName: 'philosophySection[valores][items]' }); %>
-                    <% }); %>
-                <% } else { %>
-                    <p class="empty-list-message">Aún no hay valores definidos. Añade uno:</p>
-                <% } %>
+            <div class="form-group">
+                <label for="philosophySection_valores_items">Valores (uno por línea):</label>
+                <textarea id="philosophySection_valores_items" name="philosophySection[valores][items]" rows="6"><%= profile && profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.join('\n') : '' %></textarea>
+                <small>Escribe cada valor en una línea separada. El salto de línea (Enter) creará una viñeta.</small>
             </div>
-            <button type="button" id="add-valor-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Valor</button>
         </section>
 
         <section class="section-card">
@@ -183,7 +178,7 @@
             </div>
             <div class="form-group">
                 <label for="contactSection_contactImage">URL de Imagen de Contacto:</label>
-                <input type="text" id="contactSection_contactImage" name="contactSection[contactImage]" value="<%= profile && profile.contactSection ? profile.contactSection.contactImage : '' %>" required>
+                <input type="text" id="contactSection_contactImage" name="contactSection[contactImage]" value="<%= profile && profile.contactSection && profile.contactSection.contactImage ? profile.contactSection.contactImage : '' %>" required>
                 <small>URL de la imagen destacada para la sección de "CONTACTO"</small>
             </div>
         </section>
@@ -200,7 +195,6 @@
             <p class="empty-list-message">Aún no hay páginas de detalle. Añade una:</p>
         <% } %>
     </div>
-    <button type="button" id="add-item-detail-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Página de Detalle</button>
 </section>
 
         <div class="form-actions">
@@ -277,8 +271,45 @@
         transform: translateY(-2px);
     }
     .form-group {
-        margin-bottom: 20px;
-    }
+    margin-bottom: 20px;
+}
+/* Agrega esta nueva clase para un espaciado más compacto */
+.form-group-sm {
+    margin-bottom: 10px; /* Puedes ajustar este valor a tu gusto */
+}
+.form-group-sm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+.form-group-sm input[type="text"],
+.form-group-sm input[type="number"],
+.form-group-sm input[type="email"],
+.form-group-sm textarea {
+    width: calc(100% - 24px); 
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+.form-group-sm input[type="text"]:focus,
+.form-group-sm input[type="number"]:focus,
+.form-group-sm input[type="email"]:focus,
+.form-group-sm textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.form-group-sm small {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+    font-size: 0.85em;
+}
+
     .form-group label {
         display: block;
         margin-bottom: 8px;
@@ -336,6 +367,7 @@
         position: relative;
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
     }
+
     .dynamic-item-block h4 {
         margin-top: 0;
         color: #444;
@@ -471,7 +503,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let specializedItemIndex = <%= profile && profile.specializedServices && profile.specializedServices.items ? profile.specializedServices.items.length : 0 %>;
-        let valorIndex = <%= profile && profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.length : 0 %>;
         let serviceSlideIndex = <%= profile && profile.servicesOverview && profile.servicesOverview.slides ? profile.servicesOverview.slides.length : 0 %>;
         let clientLogoIndex = <%= profile && profile.clientsSection && profile.clientsSection.clientLogos ? profile.clientsSection.clientLogos.length : 0 %>;
 
@@ -558,49 +589,24 @@ document.getElementById('add-specialized-item-btn').addEventListener('click', ()
 document.querySelectorAll('#specialized-items-container .dynamic-item-block .remove-item-button')
     .forEach(btn => addRemoveListener(btn, btn.closest('.dynamic-item-block')));
 
-
-        // 3. Valor Block
-        function addValorBlock(valorData = '', index = valorIndex) {
-            const container = document.getElementById('valores-items-container');
-            const block = document.createElement('div');
-            block.classList.add('dynamic-item-block');
-            block.innerHTML = `
-                <h4>Valor #${index + 1}</h4>
-                <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                <div class="form-group">
-                    <label for="philosophySection_valores_items_${index}">Texto del Valor:</label>
-                    <input type="text" id="philosophySection_valores_items_${index}" name="philosophySection[valores][items][${index}]" value="${valorData || ''}" required minlength = 10 maxlength = 30>
-                    <small>Texto del valor y descripción del mismo.</small>
-                </div>
-            `;
-            container.appendChild(block);
-            addRemoveListener(block.querySelector('.remove-item-button'), block);
-            valorIndex++;
-            checkEmptyListMessages();
-        }
-        document.getElementById('add-valor-btn').addEventListener('click', () => addValorBlock());
-        document.querySelectorAll('#valores-items-container .dynamic-item-block .remove-item-button')
-            .forEach(btn => addRemoveListener(btn, btn.closest('.dynamic-item-block')));
-
-
 // 4. Service Slide Block
         function addServiceSlideBlock(slideData = {}, index = serviceSlideIndex) {
             const container = document.getElementById('service-slides-container');
             const block = document.createElement('div');
             block.classList.add('dynamic-item-block');
             block.innerHTML = `
-                <h4>Slide de Servicio #${index + 1}</h4>
-                <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                <div class="form-group">
-                    <label for="servicesOverview_slides_${index}_name">Nombre del Slide:</label>
-                    <input type="text" id="servicesOverview_slides_${index}_name" name="servicesOverview[slides][${index}][name]" value="${slideData.name || ''}" required>
-                    <small>Nombre del servicio.</small>
-                </div>
-                <div class="form-group">
-                    <label for="servicesOverview_slides_${index}_image">URL de Imagen del Slide:</label>
-                    <input type="text" id="servicesOverview_slides_${index}_image" name="servicesOverview[slides][${index}][image]" value="${slideData.image || ''}" required>
-                    <small>URL de la imagen destacada para el servicio.</small>
-                </div>
+                <h4>Slide de Servicio #${index + 1}</h4>
+                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                    <div class="form-group">
+                        <label for="servicesOverview_slides_${index}_name">Nombre del Slide:</label>
+                        <input type="text" id="servicesOverview_slides_${index}_name" name="servicesOverview[slides][${index}][name]" value="${slideData.name || ''}" required>
+                        <small>Nombre del servicio.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicesOverview_slides_${index}_image">URL de Imagen del Slide:</label>
+                        <input type="text" id="servicesOverview_slides_${index}_image" name="servicesOverview[slides][${index}][image]" value="${slideData.image || ''}" required>
+                        <small>URL de la imagen destacada para el servicio.</small>
+                    </div>
                             `;
             container.appendChild(block);
             addRemoveListener(block.querySelector('.remove-item-button'), block);

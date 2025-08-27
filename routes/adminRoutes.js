@@ -175,6 +175,8 @@ router.get('/profiles/new', isAuthenticated, (req, res) => {
             correo: 'administrativo@jeguen.com',
             horario1: 'Lunes a Viernes: 9:00 AM - 6:00 PM',
             horario2: 'Sábado: 9:00 AM - 1:00 PM',
+            contactImage: 'https://liderexponencial.es/wp-content/uploads/2021/07/equipo-de-trabajo.jpg',
+            
         },
         itemDetails: [ 
             {
@@ -283,8 +285,9 @@ router.post('/profiles/new', isAuthenticated, async (req, res) => {
                     text: formData.philosophySection?.vision?.text || ''
                 },
                 valores: {
-                    items: Array.isArray(formData.philosophySection?.valores?.items)
-                        ? formData.philosophySection.valores.items.filter(v => v !== null && v !== undefined)
+                    // Utiliza split() para dividir el texto por saltos de línea y filtra los vacíos
+                    items: typeof formData.philosophySection?.valores?.items === 'string'
+                        ? formData.philosophySection.valores.items.split('\r\n').filter(v => v.trim() !== '')
                         : []
                 }
             },
