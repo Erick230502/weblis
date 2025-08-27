@@ -18,13 +18,13 @@
             <h2><i class="fas fa-info-circle"></i> INFORMACIÓN GENERAL DEL PERFIL</h2>
             <div class="form-group">
                 <label for="profileName">Nombre del Perfil:</label>
-                <input type="text" id="profileName" name="profileName" value="<%= profile ? profile.profileName : '' %>" required minlength = 5 maxlength = 100>
+                <input type="text" id="profileName" name="profileName" value="<%= profile ? profile.profileName : '' %>" required minlength = 5 maxlength = 50>
                 <small>Nombre único para identificar este perfil en el panel de administración.</small>
             </div>
 
             <div class="form-group">
                 <label for="slug">Slug (URL amigable):</label>
-                <input type="text" id="slug" name="slug" value="<%= profile ? profile.slug : '' %>" minlength = 5 maxlength = 35 required pattern="[a-z0-9-]+$" title="Solo minúsculas, números y guiones. Ej: mi-nuevo-perfil">
+                <input type="text" id="slug" name="slug" value="<%= profile ? profile.slug : '' %>" minlength = 5 maxlength = 20 required pattern="[a-z0-9-]+$" title="Solo minúsculas, números y guiones. Ej: mi-nuevo-perfil">
                 <small>Usado en la URL pública (ej. /mi-nuevo-perfil). Solo minúsculas, números y guiones. Debe ser único.</small>
             </div>
 
@@ -44,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label for="specializedServices_introText">Texto Introductorio:</label>
-                <textarea id="specializedServices_introText" name="specializedServices[introText]" required minlength = 100 maxlength = 1260 rows="3"><%= profile && profile.specializedServices ? profile.specializedServices.introText : '' %></textarea>
+                <textarea id="specializedServices_introText" name="specializedServices[introText]" required minlength = 300 maxlength = 700 rows="3"><%= profile && profile.specializedServices ? profile.specializedServices.introText : '' %></textarea>
                 <small>Texto introductorio sobre los servicios especializados (debe de ser referente a los productos. Debe causar seguridad, confianza e interes)</small>
             </div>
             <h3 style="text-align=center">ÍTEMS DE PRODUCTOS/SERVICIOS ESPECIALIZADOS</h3>
@@ -89,7 +89,7 @@
             <h3>PÁRRAFOS DE LA SECCIÓN "NOSOTROS"</h3>
                 <div class="form-group">
                     <label for="aboutUsSection_text">Párrafos de la Sección "Nosotros":</label>
-                    <textarea id="aboutUsSection_text" name="aboutUsSection[text]" rows="10" required><%= profile && profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.join('\n\n') : '' %></textarea>
+                    <textarea id="aboutUsSection_text" name="aboutUsSection[text]" rows="10" required minlength = 300 maxlength = 700><%= profile && profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.join('\n\n') : '' %></textarea>
                     <small>Escribe cada párrafo y presiona ENTER dos veces para una nueva línea. Los párrafos se separarán automáticamente en la vista.</small>
                 </div>
         </section>
@@ -109,7 +109,7 @@
             <h3>Valores</h3>
             <div class="form-group">
                 <label for="philosophySection_valores_items">Valores (uno por línea):</label>
-                <textarea id="philosophySection_valores_items" name="philosophySection[valores][items]" rows="6"><%= profile && profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.join('\n') : '' %></textarea>
+                <textarea id="philosophySection_valores_items" name="philosophySection[valores][items]" required minlength = 30 maxlength = 500 rows="6" ><%= profile && profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.join('\n') : '' %></textarea>
                 <small>Escribe cada valor en una línea separada. El salto de línea (Enter) creará una viñeta.</small>
             </div>
         </section>
@@ -118,7 +118,7 @@
             <h2><i class="fas fa-list"></i> SECCIÓN "SERVICIOS" (CARRUSEL)</h2>
             <div class="form-group">
                 <label for="servicesOverview_introText">Texto Introductorio del Carrusel:</label>
-                <textarea id="servicesOverview_introText" name="servicesOverview[introText]" required minlength = 60 maxlength = 320 rows="3"><%= profile && profile.servicesOverview ? profile.servicesOverview.introText : '' %></textarea>
+                <textarea id="servicesOverview_introText" name="servicesOverview[introText]" required minlength = 300 maxlength = 500 rows="3"><%= profile && profile.servicesOverview ? profile.servicesOverview.introText : '' %></textarea>
                 <small>Texto introductivo sobre los servicios que se ofrecen.</small>
             </div>
             <h3>Slides del Carrusel de Servicios</h3>
@@ -575,7 +575,7 @@ function addSpecializedItemBlock(itemData = {}, index = specializedItemIndex) {
         </div>
         <div class="form-group">
             <label for="specializedServices_items_${index}_description">Descripción:</label>
-            <textarea id="specializedServices_items_${index}_description" name="specializedServices[items][${index}][description]" rows="3" required minlength = 100 maxlength = 1260>${itemData.description || ''}</textarea>
+            <textarea id="specializedServices_items_${index}_description" name="specializedServices[items][${index}][description]" rows="3" required minlength = 200 maxlength = 450>${itemData.description || ''}</textarea>
             <small>Texto descriptivo sobre el producto/servicio de acuerdo a la partida (debe causar seguridad, confianza e interes)</small>
         </div>
         `;
@@ -599,7 +599,7 @@ document.querySelectorAll('#specialized-items-container .dynamic-item-block .rem
                     <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
                     <div class="form-group">
                         <label for="servicesOverview_slides_${index}_name">Nombre del Slide:</label>
-                        <input type="text" id="servicesOverview_slides_${index}_name" name="servicesOverview[slides][${index}][name]" value="${slideData.name || ''}" required>
+                        <input type="text" id="servicesOverview_slides_${index}_name" name="servicesOverview[slides][${index}][name]" value="${slideData.name || ''}" required minlength = 10 maxlength = 100>
                         <small>Nombre del servicio.</small>
                     </div>
                     <div class="form-group">

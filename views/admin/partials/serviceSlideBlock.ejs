@@ -3,7 +3,7 @@
     <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
     <div class="form-group">
         <label for="<%= parentFieldName %>[<%= index %>][name]">Nombre del Servicio:</label>
-        <input type="text" id="<%= parentFieldName %>[<%= index %>][name]" name="<%= parentFieldName %>[<%= index %>][name]" value="<%= slide.name %>" class="form-control" required>
+        <input type="text" id="<%= parentFieldName %>[<%= index %>][name]" name="<%= parentFieldName %>[<%= index %>][name]" value="<%= slide.name %>" class="form-control" required minlength = 10 maxlength = 100>
     </div>
     <div class="form-group">
         <label for="<%= parentFieldName %>[<%= index %>][image]">URL de la Imagen:</label>

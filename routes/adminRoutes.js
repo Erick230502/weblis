@@ -188,7 +188,7 @@ router.get('/profiles/new', isAuthenticated, (req, res) => {
                 intro: {
                     text: 'Ofrecemos prendas de protección personal diseñadas para acompañar al personal operativo en cada escenario crítico: lluvia, baja visibilidad, contacto exterior o intervención de emergencia.\n\nNuestras soluciones combinan resistencia, funcionalidad y diseño inteligente, ideales para brigadas de protección civil y cualquier equipo que necesite actuar con seguridad, confianza y libertad de movimiento.\n\nCada prenda está pensada para responder cuando más se necesita, cumpliendo con exigencias técnicas reales y cuidando cada detalle: materiales duraderos, estampados reflectantes, sellado profesional y confección de alta calidad.'
                 },
-                // Aquí se define el array con los bloques de contenido
+
                 contentSections: [
                     {
                         title: 'PROTECCIÓN PERSONAL CON PROPÓSITO',

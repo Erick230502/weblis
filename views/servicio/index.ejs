@@ -456,7 +456,7 @@
         background-color: var(--primary-color);
         padding: 1.5rem 0; 
         text-align: center;
-        margin-bottom: 30px; 
+        margin-bottom: 200px; 
         margin-top: -20px; 
         color: var(--light-text-color);
         display: flex; 
@@ -678,15 +678,15 @@
 }
 
 .section-title-clients{
-    margin-top:-20px;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top:-120px;
+    font-size: 3rem;
+    margin-bottom: 7rem;
     position: relative;
     display: block;
     margin-left: auto; 
     margin-right: auto; 
     color: var(--primary-color);
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     text-align: center; 
 }
@@ -703,26 +703,30 @@
     border-radius: 2px;
 }
 
+/* CLIENTS GRID */
 .clients-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-    gap: 4rem;
-    justify-items: center; 
-    align-items: center;
-    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 3rem auto 0 auto;
+    padding: 0 1rem;
 }
 
 .clients-grid img {
-    max-width: 100%;
-    height: 180px; 
-    object-fit: contain; 
-    filter: grayscale(100%) opacity(70%); 
+    /* Aquí está el cambio clave: dimensiones fijas para todas las imágenes */
+    width: 250px; 
+    height: 120px; 
+    /* Esta propiedad asegura que la imagen cubra el área sin deformarse */
+    object-fit: cover;
+    filter: grayscale(100%) opacity(70%);
     transition: filter var(--transition-speed), transform var(--transition-speed);
 }
 
 .clients-grid img:hover {
     filter: grayscale(0%) opacity(100%);
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
     /* Contact Section */
@@ -730,7 +734,7 @@
         padding: 6rem 0; 
         background-color: #ffffff; 
         text-align: center;
-        margin-top: -50px;
+        margin-top: -10px;
     }
 
     /* Título de la sección de contacto */
@@ -792,7 +796,6 @@
         text-align: center; 
     }
 
-    /* Estilo para el segundo h3 (Horario de Atención) */
     .contact-info-area h3.mt-4 {
         margin-top: 2.5rem;
         margin-bottom: 1rem;
@@ -822,7 +825,6 @@
         text-align: center; 
     }
 
-    /* Estilos para la nueva área de imagen de contacto */
     .contact-image-area {
         display: flex;
         justify-content: center;
@@ -885,7 +887,7 @@
             font-size: 1.8rem;
             margin-bottom: 2rem;
         }
-        /* Ajuste para about-us-section en móvil */
+
         .about-us-section {
             min-height: 450px; 
         }
@@ -905,10 +907,10 @@
             top: unset;
         }
         .about-text-box h2.section-title {
-            text-align: center; /* Centra el título en móvil */
+            text-align: center; 
         }
         .about-text-box h2.section-title::after {
-            left: 50%; /* Centra la línea del título en móvil */
+            left: 50%; 
             transform: translateX(-50%);
         }
         .philosophy-grid {
@@ -1125,14 +1127,14 @@
 </section>
 
 <section class="clients-section container" data-aos="fade-up" data-aos-delay="100">
-    <% if (profile.clientsSection && profile.clientsSection.clientLogos && profile.clientsSection.clientLogos.length > 0) { %>
-        <h2 class="section-title-clients text-center">CLIENTES</h2>
-        <div class="clients-grid">
-            <% profile.clientsSection.clientLogos.forEach(function(logo) { %>
-                <img src="<%= logo.image %>" alt="<%= logo.altText %>" loading="lazy">
-            <% }); %>
-        </div>
-    <% } %>
+    <% if (profile.clientsSection && profile.clientsSection.clientLogos && profile.clientsSection.clientLogos.length > 0) { %>
+        <h2 class="section-title-clients text-center">CLIENTES</h2>
+        <div style="display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;">
+            <% profile.clientsSection.clientLogos.forEach(function(logo) { %>
+                <img src="<%= logo.image %>" alt="<%= logo.altText %>" loading="lazy" style="height: 120px; object-fit: contain; flex-basis: 250px;">
+            <% }); %>
+        </div>
+    <% } %>
 </section>
 
 <section id="contacto" class="contact-section container" data-aos="fade-up" data-aos-delay="100">
@@ -1184,8 +1186,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Busca el contenedor del carrusel con la clase "services-carousel"
     const servicesCarousel = document.querySelector('.services-carousel');
 
-    // Mueve la inicialización de Swiper dentro de un `if` que comprueba si el carrusel existe.
-    // Esto asegura que solo se inicialice si el EJS lo ha renderizado.
     if (servicesCarousel) {
         var swiper = new Swiper(servicesCarousel, {
             slidesPerView: 1,
