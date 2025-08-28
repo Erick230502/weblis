@@ -32,19 +32,14 @@
         padding-bottom: 15px;
         border-bottom: 2px solid #eee;
     }
-    .form-container h1 {
-        color: #333;
-        font-size: 2.5em;
-        margin: 0;
-        font-weight: 700;
-    }
+
     .form-container h2 {
-        color: #007bff; /* Primary blue */
+        color: black; 
         font-size: 1.8em;
         margin-top: 35px;
         margin-bottom: 20px;
         padding-bottom: 10px;
-        border-bottom: 1px dashed #cce5ff; /* Light blue dashed line */
+        border-bottom: 1px dashed #cce5ff;
         display: flex;
         align-items: center;
         font-weight: 600;
@@ -61,6 +56,7 @@
         border-bottom: 1px solid #eee;
         padding-bottom: 5px;
         font-weight: 600;
+        text-align: center;
     }
     .back-button {
         background-color: #6c757d;
@@ -277,7 +273,7 @@
 
 <div class="form-container">
     <div class="header">
-        <h1><i class="fas fa-edit"></i> <%= title %></h1>
+        <h1 style="color: #0D0E5E; font-size: 3rem">EDITAR PERFIL</h1>
         <a href="/admin" class="back-button">
             <i class="fas fa-arrow-left"></i> Volver al Dashboard
         </a>
@@ -362,9 +358,8 @@
                 <input type="text" id="aboutUsSection_image" name="aboutUsSection[image]" value="<%= profile.aboutUsSection ? profile.aboutUsSection.image : '' %>">
                 <small>URL de la imagen destacada para "NOSOTROS"</small>
             </div>
-            <h3>Párrafos de Texto "Nosotros"</h3>
             <div class="form-group">
-                <label for="aboutUsSection_textParagraphs">Párrafos de Texto "Nosotros":</label>
+                <label for="aboutUsSection_textParagraphs">Párrafo de Texto "Nosotros":</label>
                 <textarea id="aboutUsSection_textParagraphs" name="aboutUsSection[textParagraphs]" rows="10" class="form-control"><%= profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.join('\n\n') : '' %></textarea>
                 <small>Escribe cada párrafo y presiona ENTER dos veces para una nueva línea. Los párrafos se separarán automáticamente en la vista.</small>
             </div>
@@ -471,7 +466,6 @@
                     <p class="empty-list-message">Aún no hay páginas de detalle de ítems. Añade una:</p>
                 <% } %>
             </div>
-            <button type="button" id="add-item-detail-btn" class="add-item-button"><i class="fas fa-plus-circle"></i> Añadir Página de Detalle</button>
         </section>
 
         <div class="form-actions">
@@ -483,16 +477,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Inicializa los contadores con el número de ítems existentes
         let specializedItemIndex = <%= profile.specializedServices && profile.specializedServices.items ? profile.specializedServices.items.length : 0 %>;
-        let aboutUsParagraphIndex = <%= profile.aboutUsSection && profile.aboutUsSection.textParagraphs ? profile.aboutUsSection.textParagraphs.length : 0 %>;
-        let valorIndex = <%= profile.philosophySection && profile.philosophySection.valores && profile.philosophySection.valores.items ? profile.philosophySection.valores.items.length : 0 %>;
         let serviceSlideIndex = <%= profile.servicesOverview && profile.servicesOverview.slides ? profile.servicesOverview.slides.length : 0 %>;
         let clientLogoIndex = <%= profile.clientsSection && profile.clientsSection.clientLogos ? profile.clientsSection.clientLogos.length : 0 %>;
         let detailItemMainIndex = <%= profile.itemDetails ? profile.itemDetails.length : 0 %>;
-        let detailContentIndex = 0; // Para los bloques anidados de Item Details
+        let detailContentIndex = 0; 
 
-        // Función para añadir el listener de eliminación
         function addRemoveListener(block) {
             const removeButton = block.querySelector('.remove-item-button');
             if (removeButton) {
@@ -514,8 +504,8 @@
                 });
             }
         }
-        
-        // --- Funciones para añadir nuevos bloques ---
+
+        document.querySelectorAll('.item-block, .dynamic-item-block, .service-slide-block, .client-logo-block, .detail-item-section, .detail-content-block').forEach(addRemoveListener);
 
         // Función para Specialized Item
         function addSpecializedItemBlock() {
@@ -540,44 +530,6 @@
                     <div class="form-group">
                         <label for="specializedServices_items_${newIndex}_detailSlug">Slug de Página de Detalle:</label>
                         <input type="text" id="specializedServices_items_${newIndex}_detailSlug" name="specializedServices[items][${newIndex}][detailSlug]">
-                    </div>
-                </div>
-            `;
-            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
-            container.appendChild(newBlock);
-            addRemoveListener(newBlock);
-        }
-
-        // Función para About Us Paragraphs
-        function addAboutUsParagraphBlock() {
-            const container = document.getElementById('about-us-paragraphs-container');
-            const newIndex = aboutUsParagraphIndex++;
-            const newBlockHtml = `
-                <div class="paragraph-block">
-                    <h5>Párrafo de "Nosotros" #${newIndex + 1}</h5>
-                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                    <div class="form-group">
-                        <label for="aboutUsSection_textParagraphs_${newIndex}">Texto del Párrafo:</label>
-                        <textarea id="aboutUsSection_textParagraphs_${newIndex}" name="aboutUsSection[textParagraphs][${newIndex}]" rows="4"></textarea>
-                    </div>
-                </div>
-            `;
-            const newBlock = new DOMParser().parseFromString(newBlockHtml, 'text/html').body.firstChild;
-            container.appendChild(newBlock);
-            addRemoveListener(newBlock);
-        }
-
-        // Función para Valores
-        function addValorBlock() {
-            const container = document.getElementById('valores-items-container');
-            const newIndex = valorIndex++;
-            const newBlockHtml = `
-                <div class="value-block">
-                    <h5>Valor #${newIndex + 1}</h5>
-                    <button type="button" class="remove-item-button"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                    <div class="form-group">
-                        <label for="philosophySection_valores_items_${newIndex}">Texto del Valor:</label>
-                        <textarea id="philosophySection_valores_items_${newIndex}" name="philosophySection[valores][items][${newIndex}]" rows="2"></textarea>
                     </div>
                 </div>
             `;
@@ -755,8 +707,6 @@
         
         // --- Listeners para los botones de "Añadir" ---
         document.getElementById('add-specialized-item-btn').addEventListener('click', addSpecializedItemBlock);
-        document.getElementById('add-about-us-paragraph-btn').addEventListener('click', addAboutUsParagraphBlock);
-        document.getElementById('add-valor-btn').addEventListener('click', addValorBlock);
         document.getElementById('add-service-slide-btn').addEventListener('click', addServiceSlideBlock);
         document.getElementById('add-client-logo-btn').addEventListener('click', addClientLogoBlock);
         document.getElementById('add-item-detail-btn').addEventListener('click', addDetailItemBlock);

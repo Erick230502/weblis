@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/tu-clave-de-fontawesome.js" crossorigin="anonymous"></script>
 <div class="form-container">
     <div class="header">
         <h1 style="color: #0D0E5E">CREAR UN NUEVO PERFIL</h1>
@@ -506,50 +510,93 @@
         let serviceSlideIndex = <%= profile && profile.servicesOverview && profile.servicesOverview.slides ? profile.servicesOverview.slides.length : 0 %>;
         let clientLogoIndex = <%= profile && profile.clientsSection && profile.clientsSection.clientLogos ? profile.clientsSection.clientLogos.length : 0 %>;
 
-        // Función auxiliar para añadir listeners de eliminación
-        function addRemoveListener(button, block) {
-            button.addEventListener('click', function() {
-                Swal.fire({
-                    title: '¿Eliminar ítem?',
-                    text: "Esta acción no se puede deshacer.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#dc3545',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        block.remove();
-                        checkEmptyListMessages();
-                    }
-                });
-            });
-        }
-
-        function checkEmptyListMessages() {
-            document.querySelectorAll('.empty-list-message').forEach(p => p.remove()); 
-
-            ['specialized-items-container', 'about-us-paragraphs-container', 'valores-items-container', 'service-slides-container', 'client-logos-container', 'item-details-main-container'].forEach(containerId => {
-                const container = document.getElementById(containerId);
-                if (container && container.children.length === 0) {
-                    const message = document.createElement('p');
-                    message.classList.add('empty-list-message');
-                    if (containerId === 'specialized-items-container') message.textContent = 'Aún no hay ítems de equipamiento/servicio. Añade uno:';
-                    else if (containerId === 'valores-items-container') message.textContent = 'Aún no hay valores definidos. Añade uno:';
-                    else if (containerId === 'service-slides-container') message.textContent = 'Aún no hay slides de servicio. Añade uno:';
-                    else if (containerId === 'client-logos-container') message.textContent = 'Aún no hay logos de clientes. Añade uno:';
-                    else if (containerId === 'item-details-main-container') message.textContent = 'Aún no hay páginas de detalle de ítems. Añade una:';
-                    container.appendChild(message);
+function addRemoveListener(button, block) {
+        button.addEventListener('click', function() {
+            Swal.fire({
+                title: '¿Eliminar ítem?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    block.remove();
+                    checkEmptyListMessages();
                 }
             });
-        }
+        });
+    }
 
-        document.querySelectorAll('.empty-list-message').forEach(p => {
-            if (p.parentElement.children.length > 1) { 
-                p.remove();
+    // Mueve esta función también al ámbito global
+    function checkEmptyListMessages() {
+        document.querySelectorAll('.empty-list-message').forEach(p => p.remove()); 
+
+        ['specialized-items-container', 'service-slides-container', 'client-logos-container'].forEach(containerId => {
+            const container = document.getElementById(containerId);
+            if (container && container.children.length === 0) {
+                const message = document.createElement('p');
+                message.classList.add('empty-list-message');
+                if (containerId === 'specialized-items-container') message.textContent = 'Aún no hay ítems de equipamiento/servicio. Añade uno:';
+                else if (containerId === 'service-slides-container') message.textContent = 'Aún no hay slides de servicio. Añade uno:';
+                else if (containerId === 'client-logos-container') message.textContent = 'Aún no hay logos de clientes. Añade uno:';
+                container.appendChild(message);
             }
         });
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let specializedItemIndex = <%= profile && profile.specializedServices && profile.specializedServices.items ? profile.specializedServices.items.length : 0 %>;
+        let serviceSlideIndex = <%= profile && profile.servicesOverview && profile.servicesOverview.slides ? profile.servicesOverview.slides.length : 0 %>;
+        let clientLogoIndex = <%= profile && profile.clientsSection && profile.clientsSection.clientLogos ? profile.clientsSection.clientLogos.length : 0 %>;
+        
+        // El resto de tu código que llama a las funciones va aquí
+        document.querySelectorAll('.remove-item-button').forEach(button => {
+            const block = button.closest('.dynamic-item-block') || button.closest('.item-block');
+            if (block) {
+                addRemoveListener(button, block);
+            }
+        });
+
+        const addSpecializedBtn = document.getElementById('add-specialized-item-btn');
+        if (addSpecializedBtn) {
+            addSpecializedBtn.addEventListener('click', function() {
+                const container = document.getElementById('specialized-items-container');
+                const newIndex = specializedItemIndex++;
+                const newBlockHtml = `
+                    <div class="item-block card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Ítem Especializado #${newIndex + 1}</h5>
+                            <div class="form-group">
+                                <label for="specializedServices[items][${newIndex}][name]">Nombre:</label>
+                                <input type="text" id="specializedServices[items][${newIndex}][name]" name="specializedServices[items][${newIndex}][name]" value="" class="form-control" required minlength = 10 maxlength = 100>
+                            </div>
+                            <div class="form-group">
+                                <label for="specializedServices[items][${newIndex}][image]">URL de Imagen:</label>
+                                <input type="text" id="specializedServices[items][${newIndex}][image]" name="specializedServices[items][${newIndex}][image]" value="" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="specializedServices[items][${newIndex}][description]">Descripción:</label>
+                                <textarea id="specializedServices[items][${newIndex}][description]" name="specializedServices[items][${newIndex}][description]" rows="3" class="form-control" required minlength = 200 maxlength = 450></textarea>
+                            </div>
+                            <button type="button" class="remove-item-button btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', newBlockHtml);
+                checkEmptyListMessages();
+                
+                const newItemBlock = container.lastElementChild;
+                const newRemoveBtn = newItemBlock.querySelector('.remove-item-button');
+                addRemoveListener(newRemoveBtn, newItemBlock);
+            });
+        }
+    });
 
         // ===========================================
         // Funciones para añadir bloques dinámicos
