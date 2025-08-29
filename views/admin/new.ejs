@@ -698,8 +698,8 @@ document.querySelectorAll('#specialized-items-container .dynamic-item-block .rem
 let detailItemMainIndex = <%= (profile && profile.itemDetails) ? profile.itemDetails.length : 0 %>;
 
 function addDetailItemBlock(itemDetailData = {}, mainIndex = detailItemMainIndex) {
-    const mainContainer = document.getElementById('item-details-container'); // <<-- ID CORREGIDO
-    // Prevén agregar más de un bloque de detalle
+    const mainContainer = document.getElementById('item-details-container');
+
     if (mainContainer.children.length > 0 && !mainContainer.querySelector('.empty-list-message')) {
         alert('Solo puedes añadir una página de detalle general.');
         return;
@@ -732,17 +732,17 @@ function addDetailItemBlock(itemDetailData = {}, mainIndex = detailItemMainIndex
             <h4><i class="fas fa-pencil-alt"></i> Introducción del Detalle</h4>
             <div class="form-group">
                 <label for="itemDetails_${mainIndex}_intro_paragraph1">Párrafo Introductorio 1:</label>
-                <textarea id="itemDetails_${mainIndex}_intro_paragraph1" name="itemDetails[${mainIndex}][intro][paragraph1]" rows="3" required minlength = 20 maxlength = 100 class="form-control">${itemDetailData.intro ? itemDetailData.intro.paragraph1 : ''}</textarea>
+                <textarea id="itemDetails_${mainIndex}_intro_paragraph1" name="itemDetails[${mainIndex}][intro][paragraph1]" rows="3" minlength = 20 maxlength = 100 class="form-control">${itemDetailData.intro ? itemDetailData.intro.paragraph1 : ''}</textarea>
                 <small>Texto introductorio sobre la diferenciación de la marca</small>
             </div>
             <div class="form-group">
                 <label for="itemDetails_${mainIndex}_intro_paragraph2">Párrafo Introductorio 2:</label>
-                <textarea id="itemDetails_${mainIndex}_intro_paragraph2" name="itemDetails[${mainIndex}][intro][paragraph2]" rows="3" required minlength = 20 maxlength = 100 class="form-control">${itemDetailData.intro ? itemDetailData.intro.paragraph2 : ''}</textarea>
+                <textarea id="itemDetails_${mainIndex}_intro_paragraph2" name="itemDetails[${mainIndex}][intro][paragraph2]" rows="3" minlength = 20 maxlength = 100 class="form-control">${itemDetailData.intro ? itemDetailData.intro.paragraph2 : ''}</textarea>
                 <small>Texto introductorio sobre la diferenciación de la marca</small>
             </div>
             <div class="form-group">
                 <label for="itemDetails_${mainIndex}_intro_paragraph3">Párrafo Introductorio 3:</label>
-                <textarea id="itemDetails_${mainIndex}_intro_paragraph3" name="itemDetails[${mainIndex}][intro][paragraph3]" rows="3" required minlength = 20 maxlength = 100 class="form-control">${itemDetailData.intro ? itemDetailData.intro.paragraph3 : ''}</textarea>
+                <textarea id="itemDetails_${mainIndex}_intro_paragraph3" name="itemDetails[${mainIndex}][intro][paragraph3]" rows="3" minlength = 20 maxlength = 100 class="form-control">${itemDetailData.intro ? itemDetailData.intro.paragraph3 : ''}</textarea>
                 <small>Texto introductorio sobre la diferenciación de la marca</small>
             </div>
 

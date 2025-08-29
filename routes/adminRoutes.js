@@ -466,19 +466,17 @@ router.put('/profiles/edit/:id', isAuthenticated, async (req, res) => {
                     name: item.name || '',
                     image: item.image || '',
                     description: item.description || '',
-                    detailSlug: detailSlug // Usar el slug dinámico
+                    detailSlug: detailSlug 
                 })) : []
             },
             aboutUsSection: {
                 image: formData.aboutUsSection?.image || '',
-                // Unificar el campo de texto en un array de párrafos
                 textParagraphs: formData.aboutUsSection?.textParagraphs ? formData.aboutUsSection.textParagraphs.split('\r\n').filter(p => p.trim() !== '') : []
             },
             philosophySection: {
                 mision: { text: formData.philosophySection?.mision?.text || '' },
                 vision: { text: formData.philosophySection?.vision?.text || '' },
                 valores: {
-                    // Unificar el campo de texto en un array de ítems
                     items: formData.philosophySection?.valores?.items ? formData.philosophySection.valores.items.split('\r\n').filter(v => v.trim() !== '') : []
                 }
             },
@@ -487,7 +485,7 @@ router.put('/profiles/edit/:id', isAuthenticated, async (req, res) => {
                 slides: Array.isArray(formData.servicesOverview?.slides) ? formData.servicesOverview.slides.map(slide => ({
                     name: slide.name || '',
                     image: slide.image || '',
-                    detailSlug: detailSlug // Usar el slug dinámico
+                    detailSlug: detailSlug 
                 })) : []
             },
             clientsSection: {
@@ -505,16 +503,14 @@ router.put('/profiles/edit/:id', isAuthenticated, async (req, res) => {
                 contactImage: formData.contactSection?.contactImage || ''
             },
             itemDetails: Array.isArray(formData.itemDetails) ? formData.itemDetails.map(itemDetail => ({
-                itemSlug: detailSlug, // Usar el slug dinámico
+                itemSlug: detailSlug, 
                 hero: {
                     title: itemDetail.hero?.title || '',
                     subtitle: itemDetail.hero?.subtitle || '',
                     backgroundImage: itemDetail.hero?.backgroundImage || ''
                 },
                 intro: {
-                    paragraph1: itemDetail.intro?.paragraph1 || '',
-                    paragraph2: itemDetail.intro?.paragraph2 || '',
-                    paragraph3: itemDetail.intro?.paragraph3 || ''
+                    intro_text: formData.intro?.intro_text ? formData.intro.intro_text.split('\r\n').filter(p => p.trim() !== '') : []
                 },
                 contentSections: Array.isArray(itemDetail.contentSections) ? itemDetail.contentSections.map(block => ({
                     title: block.title || '',

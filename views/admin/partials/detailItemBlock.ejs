@@ -14,13 +14,6 @@
             <input type="text" id="itemDetails_<%= mainIndex %>_hero_backgroundImage" name="itemDetails[<%= mainIndex %>][hero][backgroundImage]" value="<%= itemDetail.hero ? itemDetail.hero.backgroundImage : '' %>" class="form-control">
         </div>
 
-        <h4 style="font-size:30px; text-align:center"><i class="fas fa-pencil-alt" style="color:#007bff"></i> INTRODUCCIÓN DEL DETALLE</h4>
-            <div class="form-group">
-                <label for="itemDetails_<%= mainIndex %>_intro_text">Texto Introductorio:</label>
-                <textarea id="itemDetails_<%= mainIndex %>_intro_text" name="itemDetails[<%= mainIndex %>][intro][text]" rows="6" class="form-control"><%= itemDetail.intro ? itemDetail.intro.text : '' %></textarea>
-                <small>Escribe aquí el texto de introducción. Puedes usar saltos de línea para separar párrafos.</small>
-            </div>
-
         <h4 style="font-size:30px; text-align:center"><i class="fas fa-file-text" style= "color:#007bff"></i> BLOQUES DE CONTENIDO DE DETALLE</h4>
         <div id="item-details-content-sections-container-<%= mainIndex %>">
             <% if (itemDetail.contentSections && itemDetail.contentSections.length > 0) { %>

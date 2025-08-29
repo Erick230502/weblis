@@ -39,7 +39,7 @@ const contactInfoSchema = new mongoose.Schema({
 // Esquema para cada bloque de contenido dentro de una página de detalle (texto + imagen)
 const detailContentBlockSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  text: { type: String, required: true }, 
+  text: { type: String }, 
   image: { type: String, required: true }, 
   imageCaption: { type: String }, 
   isReversed: { type: Boolean, default: false }
